@@ -22,10 +22,18 @@ void MWindow::cycle() {
 
 		// Other handling stuff here later
 
-		// Repainting the screen
+		// Display the screen
 		clear(color);
+
+		for (sf::Drawable* object : objects) {
+			draw(*object);
+		}
 
 		display();
 
 	}
+}
+
+void MWindow::add(sf::Drawable* obj) {
+	objects.push_back(obj);
 }
