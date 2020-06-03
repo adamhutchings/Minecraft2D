@@ -1,8 +1,9 @@
 #include "m_window.h"
 
 MWindow::MWindow(int x, int y, std::string title)
-: sf::RenderWindow(sf::VideoMode(x, y), title) {
-	// Nothing here for now but calling the super constructor
+: sf::RenderWindow(sf::VideoMode(x, y), title),
+color(0, 0, 0) {
+	// Color defaults to black
 }
 
 void MWindow::cycle() {
@@ -20,6 +21,11 @@ void MWindow::cycle() {
 		}
 
 		// Other handling stuff here later
+
+		// Repainting the screen
+		clear(color);
+
+		display();
 
 	}
 }

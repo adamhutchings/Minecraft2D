@@ -8,6 +8,8 @@
 class MWindow : public sf::RenderWindow {
 public:
 
+	sf::Color color;
+
 	// x and y are dimensions
 	MWindow(int x, int y, std::string title);
 

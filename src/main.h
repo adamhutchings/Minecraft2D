@@ -3,8 +3,9 @@
 
 #include "render/m_window.h"
 
-// Window dimensions and title
+// Window settings
 #define WN_WIDTH 1000
 #define WN_HEIGHT 1000
+#define WN_BG_COLOR sf::Color(100, 175, 250)
 
 #endif // MAIN_M2D_H
