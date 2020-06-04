@@ -2,6 +2,7 @@
 #define MAIN_M2D_H
 
 #include "render/m_window.h"
+#include "render/block.h"
 
 // Window settings
 #define WN_WIDTH 2000
