@@ -18,7 +18,7 @@ public:
 
 	Renderable(MWindow& window, bool l=false);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	void render(sf::RenderTarget& window) = 0;
-}
+	virtual void render(sf::RenderTarget& window) const = 0;
+};
 
 #endif // M_RENDERABLE_H
