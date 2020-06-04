@@ -12,6 +12,10 @@ class Renderable;
 class MWindow : public sf::RenderWindow {
 public:
 
+	// Offsets from being a centered window
+	int xShift;
+	int yShift;
+
 	sf::Color color;
 
 	// For rendering

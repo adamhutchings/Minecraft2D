@@ -4,7 +4,7 @@
 MWindow::MWindow(int x, int y, std::string title)
 : sf::RenderWindow(sf::VideoMode(x, y), title),
 color(0, 0, 0) {
-	// Color defaults to black
+	xShift = yShift = 0;
 }
 
 void MWindow::cycle() {
