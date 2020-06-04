@@ -5,6 +5,9 @@
 #include <string>
 #include <vector>
 
+// Includes are weird
+class Renderable;
+
 // Contains code for a window class.
 class MWindow : public sf::RenderWindow {
 public:
@@ -12,7 +15,7 @@ public:
 	sf::Color color;
 
 	// For rendering
-	std::vector<sf::Drawable*> objects;
+	std::vector<Renderable*> objects;
 
 	// x and y are dimensions
 	MWindow(int x, int y, std::string title);
@@ -20,7 +23,7 @@ public:
 	// The main loop
 	void cycle();
 
-	void add(sf::Drawable* obj);
+	void add(Renderable* obj);
 };
 
 #endif // M_WINDOW_H

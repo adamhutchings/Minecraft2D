@@ -1,4 +1,5 @@
 #include "m_window.h"
+#include "renderable.h"
 
 MWindow::MWindow(int x, int y, std::string title)
 : sf::RenderWindow(sf::VideoMode(x, y), title),
@@ -25,7 +26,7 @@ void MWindow::cycle() {
 		// Display the screen
 		clear(color);
 
-		for (sf::Drawable* object : objects) {
+		for (Renderable* object : objects) {
 			draw(*object);
 		}
 
@@ -34,6 +35,6 @@ void MWindow::cycle() {
 	}
 }
 
-void MWindow::add(sf::Drawable* obj) {
+void MWindow::add(Renderable* obj) {
 	objects.push_back(obj);
 }
