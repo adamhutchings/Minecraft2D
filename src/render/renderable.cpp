@@ -1,10 +1,12 @@
 #include "renderable.h"
 
-Renderable::Renderable(MWindow& window, bool l) {
+Renderable::Renderable(MWindow& window) {
 	window.add(this);
-	locked = l;
 }
 
 void Renderable::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	render(target);
+	wn = &(dynamic_cast<MWindow&>(target));
+	if (wn) {
+		render(*wn);
+	}
 }
