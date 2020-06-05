@@ -27,6 +27,17 @@ void MWindow::cycle() {
 			}
 		}
 
+		// Key presses
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+			yShift -= 1;
+		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+			yShift += 1;
+		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+			xShift -= 1;
+		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+			xShift += 1;
+		}
+
 		// Other handling stuff here later
 
 		// Display the screen
