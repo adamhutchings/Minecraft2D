@@ -25,7 +25,7 @@ Block::Block(MWindow& window, int x, int y, std::string type)
 }
 
 void Block::updateSpritePosition(MWindow& relativeTo) {
-	spr.setPosition(x*200 + 100 - relativeTo.xShift, y*200 + 100 - relativeTo.yShift);
+	spr.setPosition(x*200 + 100 - relativeTo.xShift,  -y*200 + 100 - relativeTo.yShift);
 }
 
 void Block::render(MWindow& target) const {
