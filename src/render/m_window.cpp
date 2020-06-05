@@ -1,5 +1,8 @@
 #include "m_window.h"
+#include "block.h"
 #include "renderable.h"
+
+class Block;
 
 MWindow::MWindow(int x, int y, std::string title)
 : sf::RenderWindow(sf::VideoMode(x, y), title),
@@ -8,6 +11,9 @@ color(0, 0, 0) {
 }
 
 void MWindow::cycle() {
+
+	// For handling
+	Block* block;
 
 	// Simply for events
 	sf::Event event;
@@ -27,6 +33,10 @@ void MWindow::cycle() {
 		clear(color);
 
 		for (Renderable* object : objects) {
+			block = dynamic_cast<Block*>(object);
+			if (block) {
+				block->updateSpritePosition(*this);
+			}
 			draw(*object);
 		}
 
