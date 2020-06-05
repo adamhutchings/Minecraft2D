@@ -10,7 +10,7 @@ int main() {
 	wn.color = WN_BG_COLOR;
 
 	// Let's make a test block!
-	Block block(wn, "grass");
+	M2DWorld world(wn);
 
 	wn.cycle();
 
