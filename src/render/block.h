@@ -8,8 +8,9 @@
 #include "renderable.h"
 
 inline sf::Texture GRASS_TEX;
+inline sf::Texture DIRT_TEX;
+inline sf::Texture STONE_TEX;
 inline sf::Texture DEFAULT_TEX; // For an errored-out block
-// More textures here later
 
 class MWindow;
 
