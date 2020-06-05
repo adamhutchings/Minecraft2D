@@ -1,4 +1,6 @@
 #include "block.h"
+#include "m_window.h"
+#include "renderable.h"
 
 void loadTextures() {
 	if (!GRASS_TEX  .loadFromFile("res/grass.jpg") ||
@@ -7,17 +9,25 @@ void loadTextures() {
 	}
 }
 
-Block::Block(MWindow& window, std::string type)
-: Renderable(window, true) {
-	// For now, always render in the center of the screen
-	tex.setPosition(900, 900);
+Block::Block(MWindow& window, int x, int y, std::string type)
+: Renderable(window) {
+
+	this->x = x;
+	this->y = y;
+
 	if (type == "grass") {
-		tex.setTexture(GRASS_TEX, true);
+		spr.setTexture(GRASS_TEX, true);
 	} else {
-		tex.setTexture(DEFAULT_TEX, true);
+		spr.setTexture(DEFAULT_TEX, true);
 	}
+
+	spr.setPosition(0, 0);
 }
 
-void Block::render(sf::RenderTarget& target) const {
-	target.draw(tex);
+void Block::updateSpritePosition(MWindow& relativeTo) {
+	spr.setPosition(x*200 + 100 - relativeTo.xShift, y*200 + 100 - relativeTo.yShift);
+}
+
+void Block::render(MWindow& target) const {
+	target.draw(spr);
 }
