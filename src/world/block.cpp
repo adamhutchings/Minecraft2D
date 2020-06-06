@@ -30,10 +30,6 @@ Block::Block(MWindow& window, int x, int y, std::string type)
 	spr.setPosition(0, 0);
 }
 
-void Block::updateSpritePosition(MWindow& relativeTo) {
-	spr.setPosition(x*200 + 100 - relativeTo.xShift,  -y*200 + 100 - relativeTo.yShift);
-}
-
 void Block::render(MWindow& target) const {
 	target.draw(spr);
 }

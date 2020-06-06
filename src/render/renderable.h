@@ -11,7 +11,8 @@ inline MWindow* wn;
 
 // Defines a small extension class of sf::Drawable
 class Renderable : public sf::Drawable {
-	// We aren't going to need any blurring effects on main objects
+protected:
+	sf::Sprite spr; // For rendering
 public:
 
 	// Coordinates of the object
@@ -20,7 +21,8 @@ public:
 
 	Renderable(MWindow& window);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	virtual void render(MWindow& window) const = 0;
+	virtual void render(MWindow& window) const = 0; // We aren't going to need any blurring effects on main objects
+	void updateSpritePosition(MWindow& relativeTo);
 };
 
 #endif // M_RENDERABLE_H

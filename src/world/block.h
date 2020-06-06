@@ -17,12 +17,9 @@ class MWindow;
 void loadTextures();
 
 class Block : public Renderable {
-private:
-	sf::Sprite spr;
 public:
 	Block(MWindow& window, int x, int y, std::string type="");
 	void render(MWindow& window) const override;
-	void updateSpritePosition(MWindow& relativeTo);
 };
 
 #endif // M_BLOCK_H

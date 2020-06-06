@@ -10,3 +10,7 @@ void Renderable::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 		render(*wn);
 	}
 }
+
+void Renderable::updateSpritePosition(MWindow& relativeTo) {
+	spr.setPosition(x*200 + 100 - relativeTo.xShift,  -y*200 + 100 - relativeTo.yShift);
+}
