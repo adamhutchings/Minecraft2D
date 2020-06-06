@@ -4,8 +4,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "m_window.h"
-#include "renderable.h"
+#include "../render/m_window.h"
+#include "../render/renderable.h"
 
 inline sf::Texture GRASS_TEX;
 inline sf::Texture DIRT_TEX;

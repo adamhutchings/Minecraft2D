@@ -1,7 +1,7 @@
 #ifndef MAIN_M2D_H
 #define MAIN_M2D_H
 
-#include "render/block.h"
+#include "world/block.h"
 #include "render/m_window.h"
 #include "world/world.h"
 

@@ -1,6 +1,6 @@
 #include "block.h"
-#include "m_window.h"
-#include "renderable.h"
+#include "../render/m_window.h"
+#include "../render/renderable.h"
 
 void loadTextures() {
 	if (!GRASS_TEX.loadFromFile("res/grass.jpg") ||

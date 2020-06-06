@@ -2,7 +2,7 @@
 #define M2D_WORLD_H
 
 #include <iostream>
-#include "../render/block.h"
+#include "block.h"
 #include "../render/renderable.h"
 
 class MWindow;
