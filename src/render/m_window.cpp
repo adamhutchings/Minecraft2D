@@ -1,5 +1,5 @@
 #include "m_window.h"
-#include "block.h"
+#include "../world/block.h"
 #include "renderable.h"
 
 class Block;
