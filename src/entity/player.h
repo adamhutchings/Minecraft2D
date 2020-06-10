@@ -19,6 +19,7 @@ public:
 	Player(MWindow& window, double x, double y);
 	void render(MWindow& window) const override;
 	void updateSpritePosition(MWindow& relativeTo) override;
+	int getSpawnHealth() override;
 };
 
 #endif // PLAYER_H
