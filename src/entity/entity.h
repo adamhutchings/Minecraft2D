@@ -18,8 +18,6 @@ public:
 
 	sf::Vector2f velocity; // x and y components
 
-	double facing; // Direction facing - 0 to 2pi
-
 	Entity(MWindow& window, double x, double y);
 	virtual int getSpawnHealth() = 0;
 
