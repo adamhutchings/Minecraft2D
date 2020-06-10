@@ -44,10 +44,7 @@ void MWindow::cycle() {
 		clear(color);
 
 		for (Renderable* object : objects) {
-			block = dynamic_cast<Block*>(object);
-			if (block) {
-				block->updateSpritePosition(*this);
-			}
+			object->updateSpritePosition(*this);
 			draw(*object);
 		}
 
