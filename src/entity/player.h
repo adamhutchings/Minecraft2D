@@ -1,10 +1,13 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "entity.h"
 #include "../render/m_window.h"
+
+inline sf::Texture HEAD_TEX_LEFT;
+inline sf::Texture HEAD_TEX_RIGHT;
+inline sf::Texture BODY_TEX;
 
 // Represents a player in the game.
 class Player : public Entity {

@@ -14,8 +14,6 @@ inline sf::Texture DEFAULT_TEX; // For an errored-out block
 
 class MWindow;
 
-void loadTextures();
-
 class Block : public Renderable {
 public:
 	Block(MWindow& window, int x, int y, std::string type="");

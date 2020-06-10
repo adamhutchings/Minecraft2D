@@ -1,5 +1,17 @@
 #include "main.h"
 
+void loadTextures() {
+	if (!GRASS_TEX.loadFromFile("res/grass.jpg") ||
+		!DIRT_TEX.loadFromFile("res/dirt.jpg") ||
+		!STONE_TEX.loadFromFile("res/stone.jpg") ||
+		!DEFAULT_TEX.loadFromFile("res/default.jpg") ||
+		!HEAD_TEX_LEFT.loadFromFile("res/head_left.jpg" ) ||
+		!HEAD_TEX_RIGHT.loadFromFile("res/head_right.jpg") ||
+		!BODY_TEX.loadFromFile("res/body.jpg")) {
+		std::cout << "Whoops! Unable to load the texture.\n";
+	}
+}
+
 int main() {
 
 	// Setup

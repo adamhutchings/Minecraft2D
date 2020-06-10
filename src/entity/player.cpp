@@ -3,18 +3,9 @@
 Player::Player(MWindow& window, double x, double y)
 : Entity(window, x, y) {
 
-	// Load the textures.
-	sf::Texture headTexLeft;
-	sf::Texture headTexRight;
-	sf::Texture bodyTex;
-	if (!headTexLeft.loadFromFile("res/head_left.jpg" ) ||
-		!headTexRight.loadFromFile("res/head_right.jpg") ||
-		!bodyTex.loadFromFile("res/body.jpg")) {
-		std::cout << "Player textures failed to load.\n";
-	}
-	headLeft.setTexture(headTexLeft, true);
-	headRight.setTexture(headTexRight, true);
-	body.setTexture(bodyTex, true);
+	headLeft.setTexture(HEAD_TEX_LEFT, true);
+	headRight.setTexture(HEAD_TEX_RIGHT, true);
+	body.setTexture(BODY_TEX, true);
 
 	// Facing right by default
 	this->facing = true;

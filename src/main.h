@@ -11,4 +11,6 @@
 #define WN_HEIGHT 2000
 #define WN_BG_COLOR sf::Color(100, 175, 250)
 
+void loadTextures();
+
 #endif // MAIN_M2D_H
