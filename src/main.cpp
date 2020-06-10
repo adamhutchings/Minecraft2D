@@ -23,7 +23,7 @@ int main() {
 
 	// Let's make a world and a player!
 	M2DWorld world(wn);
-	Player player(wn, 0, 0);
+	Player player(wn, world);
 
 	wn.cycle();
 

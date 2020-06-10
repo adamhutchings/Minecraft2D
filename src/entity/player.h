@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "entity.h"
 #include "../render/m_window.h"
+#include "../world/world.h"
 
 inline sf::Texture HEAD_TEX_LEFT;
 inline sf::Texture HEAD_TEX_RIGHT;
@@ -19,10 +20,11 @@ public:
 	// Is the player facing left (false) or right (true)?
 	bool facing;
 
-	Player(MWindow& window, double x, double y);
+	Player(MWindow& window, M2DWorld& world);
 	void render(MWindow& window) const override;
 	void updateSpritePosition(MWindow& relativeTo) override;
 	int getSpawnHealth() override;
+	sf::Vector2f& findSpawnLocation(M2DWorld& world);
 };
 
 #endif // PLAYER_H
