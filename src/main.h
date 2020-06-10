@@ -4,6 +4,7 @@
 #include "world/block.h"
 #include "render/m_window.h"
 #include "world/world.h"
+#include "entity/player.h"
 
 // Window settings
 #define WN_WIDTH 2000

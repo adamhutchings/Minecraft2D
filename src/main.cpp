@@ -9,8 +9,9 @@ int main() {
 	MWindow wn(WN_WIDTH, WN_HEIGHT, "2D Minecraft");
 	wn.color = WN_BG_COLOR;
 
-	// Let's make a test block!
+	// Let's make a world and a player!
 	M2DWorld world(wn);
+	Player player(wn, 0, 0);
 
 	wn.cycle();
 
