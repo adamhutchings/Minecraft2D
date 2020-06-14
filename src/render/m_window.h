@@ -1,7 +1,6 @@
 #ifndef M_WINDOW_H
 #define M_WINDOW_H
 
-#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
