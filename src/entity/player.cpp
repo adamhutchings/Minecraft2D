@@ -9,6 +9,16 @@ Player::Player(MWindow& window, M2DWorld& world)
 
 	// Facing right by default
 	this->facing = true;
+
+	// (To change later) set the window to be centered on the player
+
+	// Window has player at upper left
+	window.xShift =  x*200 + 100 - window.xShift;
+	window.yShift = -y*200 + 100 - window.yShift;
+
+	// Window has player in center
+	window.xShift -= WN_WIDTH / 2;
+	window.yShift -= WN_HEIGHT / 2;
 }
 
 void Player::render(MWindow& window) const {

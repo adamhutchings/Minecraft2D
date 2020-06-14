@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "../render/m_window.h"
 #include "../world/world.h"
+#include "../main.h"
 
 inline sf::Texture HEAD_TEX_LEFT;
 inline sf::Texture HEAD_TEX_RIGHT;
