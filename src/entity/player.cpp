@@ -32,7 +32,7 @@ void Player::updateSpritePosition(MWindow& relativeTo) {
 
 	headLeft.setPosition(xPos, yPos - 160);
 	headRight.setPosition(xPos, yPos - 160);
-	body.setPosition(xPos, yPos - 70);
+	body.setPosition(xPos, yPos - 80);
 }
 
 int Player::getSpawnHealth() {
