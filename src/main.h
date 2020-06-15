@@ -12,7 +12,7 @@
 #define WN_BG_COLOR sf::Color(100, 175, 250)
 
 // Physics settings
-#define GRAVITY_STRENGTH 0.005
+#define GRAVITY_STRENGTH 0.002
 #define FRICTION 0.05
 #define JUMP_HEIGHT 0.01
 #define WALK_SPEED 0.005
