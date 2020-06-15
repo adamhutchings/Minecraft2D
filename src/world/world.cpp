@@ -1,8 +1,11 @@
 #include "world.h"
 #include "../render/m_window.h"
+#include "block.h"
 
 M2DWorld::M2DWorld(MWindow& window)
 : Renderable(window) {
+
+	i_window = &window;
 
 	// Double array
 	blocks = new Block** [10];

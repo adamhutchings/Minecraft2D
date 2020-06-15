@@ -2,15 +2,17 @@
 #define M2D_WORLD_H
 
 #include <iostream>
-#include "block.h"
 #include "../render/renderable.h"
 
 class MWindow;
+class Block;
 
 // Represents a world made up of blocks.
 
 class M2DWorld : public Renderable {
 public:
+
+	MWindow* i_window;
 
 	// The array of blocks
 	Block*** blocks;
