@@ -7,10 +7,13 @@
 
 // Includes are weird
 class Renderable;
+class Player;
 
 // Contains code for a window class.
 class MWindow : public sf::RenderWindow {
 public:
+
+	Player* player;
 
 	// Offsets from being a centered window
 	int xShift;
