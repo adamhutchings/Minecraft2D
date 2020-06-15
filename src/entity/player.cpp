@@ -1,7 +1,12 @@
 #include "player.h"
+#include "../world/world.h"
 
-Player::Player(MWindow& window, M2DWorld& world)
-: Entity(window, findSpawnLocation(world).x, findSpawnLocation(world).y) {
+Player::Player(M2DWorld& world)
+: Entity(&world, findSpawnLocation(world).x, findSpawnLocation(world).y) {
+
+	world.i_window->player = this;
+
+	height = 2;
 
 	headLeft.setTexture(HEAD_TEX_LEFT, true);
 	headRight.setTexture(HEAD_TEX_RIGHT, true);
@@ -13,12 +18,12 @@ Player::Player(MWindow& window, M2DWorld& world)
 	// (To change later) set the window to be centered on the player
 
 	// Window has player at upper left
-	window.xShift =  x*200 + 100 - window.xShift;
-	window.yShift = -y*200 + 100 - window.yShift;
+	world.i_window->xShift =  x*200 + 100 - world.i_window->xShift;
+	world.i_window->yShift = -y*200 + 100 - world.i_window->yShift;
 
 	// Window has player in center
-	window.xShift -= WN_WIDTH / 2;
-	window.yShift -= WN_HEIGHT / 2;
+	world.i_window->xShift -= WN_WIDTH / 2;
+	world.i_window->yShift -= WN_HEIGHT / 2;
 }
 
 void Player::render(MWindow& window) const {
@@ -30,7 +35,7 @@ void Player::updateSpritePosition(MWindow& relativeTo) {
 	int xPos = x * 200 + 100 - relativeTo.xShift;
 	int yPos = -y * 200 + 100 - relativeTo.yShift;
 
-	headLeft.setPosition(xPos, yPos - 160);
+	headLeft.setPosition(xPos - 35, yPos - 160);
 	headRight.setPosition(xPos, yPos - 160);
 	body.setPosition(xPos, yPos - 80);
 }
@@ -39,7 +44,7 @@ int Player::getSpawnHealth() {
 	return 20;
 }
 
-sf::Vector2f& Player::findSpawnLocation(M2DWorld& world) {
+sf::Vector2f& findSpawnLocation(M2DWorld& world) {
 	// For now, just returns a high spawn
 	return *(new sf::Vector2f(0, 10));
 }
