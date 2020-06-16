@@ -33,7 +33,7 @@ void MWindow::cycle() {
 		}
 
 		// Key presses
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player->isCollided()) {
 			if (player) player->dy += JUMP_HEIGHT;
 		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
 			sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
@@ -45,8 +45,6 @@ void MWindow::cycle() {
 			if (player) player->dx = -WALK_SPEED;
 			player->facing = false;
 		}
-
-		// Other handling stuff here later
 
 		// Display the screen
 		clear(color);
@@ -62,13 +60,17 @@ void MWindow::cycle() {
 				entity->x += entity->dx;
 				entity->y += entity->dy;
 
+				if (entity->isCollided()) {
 				// Friction doesn't just plain decrease, entities need to stop
-				entity->dx *= abs(entity->dx) > 0.01 ? (1 - FRICTION) : 0;
-				entity->dy *= abs(entity->dy) > 0.01 ? (1 - FRICTION) : 0;
+					entity->dx *= abs(entity->dx) > 0.01 ? (1 - FRICTION) : 0;
+					entity->y = 10; // This will be replaced by a more permanent test later
+				}
 
 				// Gravity
 				if (!(entity->isCollided())) {
 					entity->dy -= GRAVITY_STRENGTH;
+				} else {
+					entity->dy = 0;
 				}
 			}
 
