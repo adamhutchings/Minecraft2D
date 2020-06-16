@@ -13,5 +13,5 @@ Entity::Entity(M2DWorld* o_world, double x, double y)
 
 bool Entity::isCollided() {
 	// Because worlds are simple right now, this doesn't need to be much.
-	return y < 10;
+	return y <= 10;
 }
