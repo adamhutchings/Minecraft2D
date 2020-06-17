@@ -1,10 +1,10 @@
 #include "item.h"
 
-int Item::getSpawnHealth() {
-	return ITEM_HEALTH;
+EntityItem::EntityItem(M2DWorld* o_world, ItemStack* is, double x, double y)
+: Entity(o_world, x, y) {
+	itemStackObj = is;
 }
 
-int Item::getMaxCount() {
-	// Just like the MC default
-	return 64;
+int EntityItem::getSpawnHealth() {
+	return ITEM_HEALTH;
 }
