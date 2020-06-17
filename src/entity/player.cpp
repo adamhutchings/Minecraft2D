@@ -2,7 +2,8 @@
 #include "../world/world.h"
 
 Player::Player(M2DWorld& world)
-: Entity(&world, findSpawnLocation(world).x, findSpawnLocation(world).y) {
+: Entity(&world, findSpawnLocation(world).x, findSpawnLocation(world).y)
+, inventory() {
 
 	world.i_window->player = this;
 

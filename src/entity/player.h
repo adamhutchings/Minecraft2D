@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "../render/m_window.h"
 #include "../main.h"
+#include "../item/inventory.h"
 
 inline sf::Texture HEAD_TEX_LEFT;
 inline sf::Texture HEAD_TEX_RIGHT;
@@ -20,6 +21,8 @@ private:
 	sf::Sprite headLeft; sf::Sprite headRight; // both 40x40
 	sf::Sprite body; // 23x140 (just the size I downloaded, may change)
 public:
+
+	PlayerInventory* inventory;
 
 	// Is the player facing left (false) or right (true)?
 	bool facing;
