@@ -61,10 +61,17 @@ void Player::update(){
 	double rotation = (xDiff == 0) ? (yDiff > 0 ? -pi/4 : pi/4) : atan(yDiff / xDiff);
 
 	// Right head only faces right (-pi/2 to pi/2), left head left(-pi/2 to -pi/4, pi/4 to pi/2)
+	// Also, if the player isn't moving, make them face the direction of the mouse
 	if (xDiff < 0) {
+		if (dx == 0) {
+			facing = false;
+		}
 		// Mouse is left
 		headLeft.setRotation(- rotation * 360 / (2 * pi));
 	} else {
+		if (dx == 0) {
+			facing = true;
+		}
 		headRight.setRotation(- rotation * 360 / (2 * pi));
 	}
 
