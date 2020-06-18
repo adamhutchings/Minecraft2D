@@ -32,6 +32,9 @@ void MWindow::cycle() {
 			}
 		}
 
+		// Centering
+		if (player) player->setCenter();
+
 		// Key presses
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player->isCollided()) {
 			if (player) player->dy += JUMP_HEIGHT;

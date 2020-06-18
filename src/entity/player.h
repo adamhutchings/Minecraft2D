@@ -31,6 +31,7 @@ public:
 	void render(MWindow& window) const override;
 	void updateSpritePosition(MWindow& relativeTo) override;
 	int getSpawnHealth() override;
+	void setCenter();
 };
 
 #endif // PLAYER_H

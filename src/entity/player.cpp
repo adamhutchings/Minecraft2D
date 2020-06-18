@@ -15,16 +15,6 @@ Player::Player(M2DWorld& world)
 
 	// Facing right by default
 	this->facing = true;
-
-	// (To change later) set the window to be centered on the player
-
-	// Window has player at upper left
-	world.i_window->xShift =  x*200 + 100 - world.i_window->xShift;
-	world.i_window->yShift = -y*200 + 100 - world.i_window->yShift;
-
-	// Window has player in center
-	world.i_window->xShift -= WN_WIDTH / 2;
-	world.i_window->yShift -= WN_HEIGHT / 2;
 }
 
 void Player::render(MWindow& window) const {
@@ -43,6 +33,12 @@ void Player::updateSpritePosition(MWindow& relativeTo) {
 
 int Player::getSpawnHealth() {
 	return 20;
+} 
+
+void Player::setCenter() {
+	// Set the window to be centered on the player
+	world->i_window->xShift =  x*200 + 100 - WN_WIDTH / 2;
+	world->i_window->yShift = -y*200 + 100 - WN_HEIGHT / 2;
 }
 
 sf::Vector2f& findSpawnLocation(M2DWorld& world) {
