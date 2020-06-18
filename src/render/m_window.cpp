@@ -35,13 +35,13 @@ void MWindow::cycle() {
 		// Key presses
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player->isCollided()) {
 			if (player) player->dy += JUMP_HEIGHT;
-		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
 			sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
 			// Sneak later, but not yet
-		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 			if (player) player->dx = WALK_SPEED;
 			player->facing = true;
-		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 			if (player) player->dx = -WALK_SPEED;
 			player->facing = false;
 		}
