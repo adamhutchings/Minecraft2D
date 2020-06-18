@@ -9,8 +9,8 @@
 #include "../item/inventory.h"
 
 // Hardcoded player head coords for now
-#define PLAYER_HEAD_X 1482
-#define PLAYER_HEAD_Y 2772
+#define PLAYER_HEAD_X 1050
+#define PLAYER_HEAD_Y 916
 
 inline sf::Texture HEAD_TEX_LEFT;
 inline sf::Texture HEAD_TEX_RIGHT;

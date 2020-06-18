@@ -51,7 +51,7 @@ void Player::update(){
 
 	/* Update head location */
 
-	sf::Vector2i pos = sf::Mouse::getPosition();
+	sf::Vector2i pos = sf::Mouse::getPosition(*(world->i_window));
 
 	double pi = 2 * acos(0.0);
 
