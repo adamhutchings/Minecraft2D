@@ -56,22 +56,7 @@ void MWindow::cycle() {
 			// Entity handling
 			entity = dynamic_cast<Entity*>(object);
 			if (entity) {
-				// Movement
-				entity->x += entity->dx;
-				entity->y += entity->dy;
-
-				if (entity->isCollided()) {
-				// Friction doesn't just plain decrease, entities need to stop
-					entity->dx *= abs(entity->dx) > 0.01 ? (1 - FRICTION) : 0;
-					entity->y = 10; // This will be replaced by a more permanent test later
-				}
-
-				// Gravity
-				if (!(entity->isCollided())) {
-					entity->dy -= GRAVITY_STRENGTH;
-				} else {
-					entity->dy = 0;
-				}
+				entity->update();
 			}
 
 		}

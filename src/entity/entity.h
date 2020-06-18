@@ -30,6 +30,8 @@ public:
 
 	bool isCollided();
 
+	void update();
+
 };
 
 #endif // M_ENTITY_H
