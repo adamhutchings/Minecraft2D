@@ -30,7 +30,7 @@ public:
 
 	bool isCollided();
 
-	void update();
+	virtual void update();
 
 };
 
