@@ -13,6 +13,9 @@ class Player;
 class MWindow : public sf::RenderWindow {
 public:
 
+	// For mouse press handling
+	bool lastMousePressed;
+
 	Player* player;
 
 	// Offsets from being a centered window
@@ -31,6 +34,9 @@ public:
 	void cycle();
 
 	void add(Renderable* obj);
+
+	void onClick(int x, int y);
+	void offClick(int x, int y); // x and y might be useful here, who knows?
 };
 
 #endif // M_WINDOW_H

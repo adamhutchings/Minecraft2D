@@ -13,6 +13,7 @@ MWindow::MWindow(int x, int y, std::string title)
 color(0, 0, 0) {
 	xShift = yShift = 0;
 	player = nullptr;
+	lastMousePressed = false;
 }
 
 void MWindow::cycle() {
@@ -49,6 +50,15 @@ void MWindow::cycle() {
 			player->facing = false;
 		}
 
+		// Mouse presses
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && !lastMousePressed) {
+			onClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y);
+			lastMousePressed = true;
+		} else if (!(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) && lastMousePressed) {
+			offClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y);
+			lastMousePressed = false;
+		}
+
 		// Display the screen
 		clear(color);
 
@@ -71,4 +81,29 @@ void MWindow::cycle() {
 
 void MWindow::add(Renderable* obj) {
 	objects.push_back(obj);
+}
+
+void MWindow::onClick(int x, int y) {
+	MButton* button;
+	for (Renderable* object : objects) {
+		button = dynamic_cast<MButton*>(object);
+		if (button) {
+			if (button->contains(x, y)) {
+				button->onClick();
+				return;
+			}
+		}
+	}
+}
+
+void MWindow::offClick(int x, int y) {
+	MButton* button;
+	for (Renderable* object : objects) {
+		button = dynamic_cast<MButton*>(object);
+		if (button) {
+			if (button->clicked) {
+				button->offClick(*this);
+			}
+		}
+	}
 }
