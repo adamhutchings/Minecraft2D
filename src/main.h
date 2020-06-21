@@ -20,7 +20,8 @@
 #define WALK_SPEED 0.005
 
 void loadButtonFont();
-
 void loadTextures();
+
+void startNewGame(MWindow& window);
 
 #endif // MAIN_M2D_H

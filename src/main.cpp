@@ -20,6 +20,20 @@ void loadTextures() {
 	}
 }
 
+void startNewGame(MWindow& window) {
+	//window.state = MAIN_GAME;
+	M2DWorld* world = new M2DWorld(window);
+	Player* player = new Player(*world);
+	MButton* button;
+	// Get rid of all the buttons
+	for (Renderable* object : window.objects) {
+		button = dynamic_cast<MButton*>(object);
+		if (button) {
+			button->hidden = true;
+		}
+	}
+}
+
 int main() {
 
 	// Setup
@@ -31,9 +45,8 @@ int main() {
 	MWindow wn(WN_WIDTH, WN_HEIGHT, "2D Minecraft");
 	wn.color = WN_BG_COLOR;
 
-	// Let's make a world and a player!
-	M2DWorld world(wn);
-	Player player(world);
+	// Button for starting game
+	MButton startGame(wn, startNewGame, "New Game", sf::Color(100, 100, 100), 1000, 1000);
 
 	wn.cycle();
 
