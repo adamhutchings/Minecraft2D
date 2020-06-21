@@ -1,10 +1,11 @@
 #include "m_button.h"
 
-MButton::MButton(MWindow& wn, void (*fn) (MWindow& wn), std::string str, sf::Color color, int x, int y)
+MButton::MButton(MWindow& wn, void (*fn) (MWindow& wn), std::string str, sf::Color color, int x, int y, bool h)
 : Renderable(wn),
 rect(sf::Vector2f(BUTTON_WIDTH, BUTTON_HEIGHT)) {
 	action = fn;
-	clicked = hidden = false;
+	clicked = false;
+	hidden = h;
 
 	// Setting up rectangle and text
 	rect.setPosition(x - BUTTON_WIDTH / 2, y - BUTTON_HEIGHT / 2);
@@ -19,10 +20,8 @@ bool MButton::contains(int xLoc, int yLoc) {
 }
 
 void MButton::render(MWindow& wn) const {
-	if (!hidden) {
-		wn.draw(rect);
-		wn.draw(text);
-	}
+	wn.draw(rect);
+	wn.draw(text);
 }
 
 void MButton::updateSpritePosition(MWindow& relativeTo) {
@@ -48,6 +47,10 @@ int MButton::getHeight() {
 
 void MButton::setPosition(int xLoc, int yLoc) {
 	rect.setPosition(xLoc - getWidth() / 2, yLoc - getHeight() / 2);
+}
+
+std::string MButton::getString() {
+	return text.getString();
 }
 
 void MButton::onClick() {

@@ -29,9 +29,7 @@ public:
 
 	bool clicked;
 
-	bool hidden;
-
-	MButton(MWindow& wn, void (*fn) (MWindow& wn), std::string str, sf::Color color, int x, int y);
+	MButton(MWindow& wn, void (*fn) (MWindow& wn), std::string str, sf::Color color, int x, int y, bool h=false);
 	bool contains(int xLoc, int yLoc);
 	void render(MWindow& window) const override;
 	void updateSpritePosition(MWindow& relativeTo) override;
@@ -40,6 +38,7 @@ public:
 	int getWidth();
 	int getHeight();
 	void setPosition(int xLoc, int yLoc);
+	std::string getString();
 
 	// Clicking
 	void onClick();
