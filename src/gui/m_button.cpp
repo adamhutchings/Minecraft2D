@@ -30,15 +30,24 @@ void MButton::updateSpritePosition(MWindow& relativeTo) {
 }
 
 void MButton::updateTextPosition() {
-	// Might make these two lines into a function, who knows
-	int w = clicked ? BUTTON_WIDTH * BUTTON_EXPANSION_FACTOR : BUTTON_WIDTH;
-	int h = clicked ? BUTTON_HEIGHT * BUTTON_EXPANSION_FACTOR : BUTTON_HEIGHT;
-	text.setPosition(rect.getPosition().x + w / 2, rect.getPosition().y + h / 2);
+	text.setPosition(rect.getPosition().x + getWidth() / 2, rect.getPosition().y + getHeight() / 2);
 	sf::FloatRect textRect = text.getLocalBounds();
 	text.setOrigin(
 		textRect.left + textRect.width / 2,
 		textRect.top + textRect.height / 2
 	);
+}
+
+int MButton::getWidth() {
+	return clicked ? BUTTON_WIDTH * BUTTON_EXPANSION_FACTOR : BUTTON_WIDTH;
+}
+
+int MButton::getHeight() {
+	return clicked ? BUTTON_HEIGHT * BUTTON_EXPANSION_FACTOR : BUTTON_HEIGHT;
+}
+
+void MButton::setPosition(int xLoc, int yLoc) {
+	rect.setPosition(xLoc - getWidth() / 2, yLoc - getHeight() / 2);
 }
 
 void MButton::onClick() {

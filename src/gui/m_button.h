@@ -37,6 +37,10 @@ public:
 	void updateSpritePosition(MWindow& relativeTo) override;
 	void updateTextPosition(); // For button resizes
 
+	int getWidth();
+	int getHeight();
+	void setPosition(int xLoc, int yLoc);
+
 	// Clicking
 	void onClick();
 	void offClick(MWindow& window);
