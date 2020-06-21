@@ -38,19 +38,19 @@ void MWindow::cycle() {
 		if (player) player->setCenter();
 
 		// Key presses
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player->isCollided()) {
-			if (player) player->dy += JUMP_HEIGHT;
-		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
-			sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
-			// Sneak later, but not yet
-		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-			if (player) player->dx = WALK_SPEED;
-			player->facing = true;
-		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-			if (player) player->dx = -WALK_SPEED;
-			player->facing = false;
-		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-			if (state == MAIN_GAME) {
+		if (state == MAIN_GAME) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player->isCollided()) {
+				if (player) player->dy += JUMP_HEIGHT;
+			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
+				sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
+				// Sneak later, but not yet
+			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+				if (player) player->dx = WALK_SPEED;
+				player->facing = true;
+			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+				if (player) player->dx = -WALK_SPEED;
+				player->facing = false;
+			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 				escape(*this);
 			}
 		}
@@ -68,9 +68,7 @@ void MWindow::cycle() {
 		clear(color);
 
 		for (Renderable* object : objects) {
-			if (state != ESCAPED) {
-				object->updateSpritePosition(*this);
-			}
+			object->updateSpritePosition(*this);
 			if (!object->hidden) {
 				draw(*object);
 			}
@@ -78,7 +76,7 @@ void MWindow::cycle() {
 			// Entity handling
 			entity = dynamic_cast<Entity*>(object);
 			if (entity) {
-				if (state != ESCAPED) {
+				if (state == MAIN_GAME) {
 					entity->update();
 				}
 			}
@@ -142,9 +140,11 @@ void changeState(MWindow& window, bool escape) {
 }
 
 void escape(MWindow& window) {
+	window.state = ESCAPED;
 	changeState(window, true);
 }
 
 void returnToGame(MWindow& window) {
+	window.state = MAIN_GAME;
 	changeState(window, false);
 }
