@@ -49,6 +49,10 @@ void MWindow::cycle() {
 		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 			if (player) player->dx = -WALK_SPEED;
 			player->facing = false;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+			if (state == MAIN_GAME) {
+				escape(*this);
+			}
 		}
 
 		// Mouse presses
@@ -64,13 +68,19 @@ void MWindow::cycle() {
 		clear(color);
 
 		for (Renderable* object : objects) {
-			object->updateSpritePosition(*this);
-			draw(*object);
+			if (state != ESCAPED) {
+				object->updateSpritePosition(*this);
+			}
+			if (!object->hidden) {
+				draw(*object);
+			}
 
 			// Entity handling
 			entity = dynamic_cast<Entity*>(object);
 			if (entity) {
-				entity->update();
+				if (state != ESCAPED) {
+					entity->update();
+				}
 			}
 
 		}
@@ -104,7 +114,37 @@ void MWindow::offClick(int x, int y) {
 		if (button) {
 			if (button->clicked) {
 				button->offClick(*this);
+				return;
 			}
 		}
 	}
+}
+
+void changeState(MWindow& window, bool escape) {
+	MButton* button;
+	Player* player;
+	Block* block;
+	for (Renderable* object : window.objects) {
+		button = dynamic_cast<MButton*>(object);
+		player = dynamic_cast<Player*>(object);
+		block = dynamic_cast<Block*>(object);
+		if (button) {
+			// There might be a better finding system here later, who knows
+			if (button->getString() == "Resume" || button->getString() == "Quit") {
+				button->hidden = !escape;
+			}
+		} else if (player) {
+			player->hidden = escape;
+		} else if (block) {
+			block->hidden = escape;
+		}
+	}
+}
+
+void escape(MWindow& window) {
+	changeState(window, true);
+}
+
+void returnToGame(MWindow& window) {
+	changeState(window, false);
 }

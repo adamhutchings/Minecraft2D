@@ -47,4 +47,8 @@ public:
 	void offClick(int x, int y); // x and y might be useful here, who knows?
 };
 
+void changeState(MWindow& window, bool escape = true);
+void escape(MWindow& window);
+void returnToGame(MWindow& window);
+
 #endif // M_WINDOW_H
