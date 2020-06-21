@@ -9,7 +9,7 @@ class Block;
 
 // Represents a world made up of blocks.
 
-class M2DWorld : public Renderable {
+class M2DWorld {
 public:
 
 	MWindow* i_window;
@@ -21,7 +21,7 @@ public:
 	M2DWorld(MWindow& window);
 
 	// Renders every component block
-	void render(MWindow& target) const override;
+	void render(MWindow& target) const;
 };
 
 #endif // M2D_WORLD_H

@@ -2,8 +2,7 @@
 #include "../render/m_window.h"
 #include "block.h"
 
-M2DWorld::M2DWorld(MWindow& window)
-: Renderable(window) {
+M2DWorld::M2DWorld(MWindow& window) {
 
 	i_window = &window;
 
