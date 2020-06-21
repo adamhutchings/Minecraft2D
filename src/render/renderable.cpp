@@ -2,6 +2,7 @@
 
 Renderable::Renderable(MWindow& window) {
 	window.add(this);
+	hidden = false;
 }
 
 void Renderable::draw(sf::RenderTarget& target, sf::RenderStates states) const {

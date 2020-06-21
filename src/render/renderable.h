@@ -15,6 +15,8 @@ protected:
 	sf::Sprite spr; // For rendering
 public:
 
+	bool hidden;
+
 	// Coordinates of the object
 	int x;
 	int y;
