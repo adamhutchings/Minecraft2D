@@ -14,6 +14,7 @@ color(0, 0, 0) {
 	xShift = yShift = 0;
 	player = nullptr;
 	lastMousePressed = false;
+	state = MAIN_MENU;
 }
 
 void MWindow::cycle() {

@@ -5,6 +5,11 @@
 #include <string>
 #include <vector>
 
+// I'll separate these into a separate file later. Maybe.
+#define MAIN_MENU 0
+#define MAIN_GAME 1
+#define ESCAPED 2
+
 // Includes are weird
 class Renderable;
 class Player;
@@ -12,6 +17,9 @@ class Player;
 // Contains code for a window class.
 class MWindow : public sf::RenderWindow {
 public:
+
+	// The state of the game
+	int state;
 
 	// For mouse press handling
 	bool lastMousePressed;
