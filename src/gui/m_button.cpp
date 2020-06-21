@@ -19,8 +19,10 @@ bool MButton::contains(int xLoc, int yLoc) {
 }
 
 void MButton::render(MWindow& wn) const {
-	wn.draw(rect);
-	wn.draw(text);
+	if (!hidden) {
+		wn.draw(rect);
+		wn.draw(text);
+	}
 }
 
 void MButton::updateSpritePosition(MWindow& relativeTo) {
