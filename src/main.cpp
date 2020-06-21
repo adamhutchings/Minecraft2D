@@ -21,7 +21,7 @@ void loadTextures() {
 }
 
 void startNewGame(MWindow& window) {
-	//window.state = MAIN_GAME;
+	window.state = MAIN_GAME;
 	M2DWorld* world = new M2DWorld(window);
 	Player* player = new Player(*world);
 	MButton* button;
@@ -32,6 +32,10 @@ void startNewGame(MWindow& window) {
 			button->hidden = true;
 		}
 	}
+}
+
+void mExit(MWindow& window) {
+	exit(EXIT_SUCCESS);
 }
 
 int main() {
@@ -45,9 +49,10 @@ int main() {
 	MWindow wn(WN_WIDTH, WN_HEIGHT, "2D Minecraft");
 	wn.color = WN_BG_COLOR;
 
-	// Button for starting game
+	// Buttons for actions
 	MButton startGame(wn, startNewGame, "New Game", sf::Color(100, 100, 100), 1000, 1000);
-
+	MButton retButton(wn, returnToGame, "Resume", sf::Color(100, 100, 100), 1000, 800, true);
+	MButton exitButton(wn, mExit, "Quit", sf::Color(100, 100, 100), 1000, 1200, true);
 	wn.cycle();
 
 	return 0;

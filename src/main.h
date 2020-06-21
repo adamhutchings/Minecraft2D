@@ -23,5 +23,6 @@ void loadButtonFont();
 void loadTextures();
 
 void startNewGame(MWindow& window);
+void mExit(MWindow& window);
 
 #endif // MAIN_M2D_H
