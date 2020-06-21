@@ -30,6 +30,8 @@ void startNewGame(MWindow& window) {
 		button = dynamic_cast<MButton*>(object);
 		if (button) {
 			button->hidden = true;
+		} else {
+			object->hidden = false;
 		}
 	}
 }
