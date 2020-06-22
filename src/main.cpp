@@ -1,7 +1,7 @@
 #include "main.h"
 
 void loadButtonFont() {
-	if (!M_BUTTON_FONT.loadFromFile("res/fonts/arial_unicode.ttf")) {
+	if (!M_BUTTON_FONT.loadFromFile("res/fonts/MC_font.ttf")) {
 		std::cout << "Whoops! An error occurred.\n";
 		exit(EXIT_FAILURE);
 	}
