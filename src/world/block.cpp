@@ -5,6 +5,8 @@
 Block::Block(MWindow& window, int x, int y, std::string type)
 : Renderable(window) {
 
+	str_type = type;
+
 	this->x = x;
 	this->y = y;
 

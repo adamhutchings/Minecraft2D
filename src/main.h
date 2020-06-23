@@ -18,6 +18,7 @@
 #define FRICTION 0.05
 #define JUMP_HEIGHT 0.005
 #define WALK_SPEED 0.005
+#define MINIMAL_JUMP_BUFFER 0.01
 
 void loadButtonFont();
 void loadTextures();
