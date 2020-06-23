@@ -14,6 +14,8 @@ Block::Block(MWindow& window, int x, int y, std::string type)
 		spr.setTexture(DIRT_TEX, true);
 	} else if (type == "stone") {
 		spr.setTexture(STONE_TEX, true);
+	} else if (type == "air") {
+		// No texture for air
 	} else {
 		spr.setTexture(DEFAULT_TEX, true);
 	}
