@@ -4,6 +4,8 @@
 #include <iostream>
 #include "../render/renderable.h"
 
+#define WORLD_HEIGHT_LIMIT 16
+
 class MWindow;
 class Block;
 
