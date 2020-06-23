@@ -13,6 +13,11 @@ Entity::Entity(M2DWorld* o_world, double x, double y)
 }
 
 bool Entity::isCollided() {
+
+	// Testing if out of world bounds
+	if (x < 0 || x >= 10) return false;
+	if (y < BLOCK_COLLISION_BUFFER || y > 16 + BLOCK_COLLISION_BUFFER) return false;
+
 	// Check block below (just for now)
 	return world->blocks[(int) x][(int) (y - BLOCK_COLLISION_BUFFER)]->str_type != "air";
 }
