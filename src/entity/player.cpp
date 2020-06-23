@@ -79,5 +79,5 @@ void Player::update(){
 
 sf::Vector2f& findSpawnLocation(M2DWorld& world) {
 	// For now, just returns a high spawn
-	return *(new sf::Vector2f(0, 10));
+	return *(new sf::Vector2f(1, 10));
 }
