@@ -9,8 +9,14 @@ If different on your machine, change the `sfml_path` variable in `scripts/build.
 
 Compile
 -------
-`sh scripts/build.sh`
+`./scripts/build.sh`
 
 Run
 ---
-`sh scripts/run.sh`
+`./scripts/run.sh`
+
+Controls
+--------
+d - right
+a - left
+space - jump
