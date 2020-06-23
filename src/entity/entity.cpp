@@ -13,8 +13,8 @@ Entity::Entity(M2DWorld* o_world, double x, double y)
 }
 
 bool Entity::isCollided() {
-	// Because worlds are simple right now, this doesn't need to be much.
-	return y <= 10;
+	// Check block below (just for now)
+	return world->blocks[(int) x][(int) (y - BLOCK_COLLISION_BUFFER)]->str_type != "air";
 }
 
 void Entity::update() {

@@ -5,6 +5,9 @@
 #include "../render/m_window.h"
 #include "../render/renderable.h"
 
+// A small error correction for block collision
+#define BLOCK_COLLISION_BUFFER 0.005
+
 class M2DWorld;
 
 // Base class for all entities
