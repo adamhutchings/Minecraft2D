@@ -3,8 +3,6 @@
 #include "../world/world.h"
 #include "../main.h"
 
-// There will DEFINITELY be more code here later
-
 Entity::Entity(M2DWorld* o_world, double x, double y)
 : Renderable(*(o_world->i_window)) {
 	this->x = x;
@@ -12,14 +10,23 @@ Entity::Entity(M2DWorld* o_world, double x, double y)
 	world = o_world;
 }
 
-bool Entity::isCollided() {
+CollisionState Entity::isCollided() {
 
 	// Testing if out of world bounds
-	if (x < 0 || x >= 10) return false;
-	if (y < BLOCK_COLLISION_BUFFER || y > 16 + BLOCK_COLLISION_BUFFER) return false;
+	if (x <= -width || x >= 10) return CollisionState::COLLIDED_NONE; // Will change  -0.2 later
+	if (y < BLOCK_COLLISION_BUFFER || y > 16 + BLOCK_COLLISION_BUFFER) return CollisionState::COLLIDED_NONE;
 
-	// Check block below (just for now)
-	return world->blocks[(int) x][(int) (y - BLOCK_COLLISION_BUFFER)]->str_type != "air";
+	if (x >= 1) {
+		if (collidedLeft()) return CollisionState::COLLIDED_LEFT;
+	} if (x <= WORLD_WIDTH - 2) {
+		if (collidedRight()) return CollisionState::COLLIDED_RIGHT;
+	} if (y >= BLOCK_COLLISION_BUFFER) {
+		if (collidedBelow()) return CollisionState::COLLIDED_BELOW;
+	} if (y - BLOCK_COLLISION_BUFFER <= WORLD_HEIGHT_LIMIT - 1) {
+		if (collidedAbove()) return CollisionState::COLLIDED_ABOVE;
+	}
+
+	return CollisionState::COLLIDED_NONE;
 }
 
 void Entity::update() {
@@ -27,10 +34,15 @@ void Entity::update() {
 	this->x += this->dx;
 	this->y += this->dy;
 
-	if (this->isCollided()) {
-	// Friction doesn't just plain decrease, entities need to stop
+	CollisionState collisionState = this->isCollided();
+
+	if (collisionState != COLLIDED_NONE) {
+		// Friction doesn't just plain decrease, entities need to stop
 		this->dx *= (this->dx > 0.01 || this->dx < -0.01) ? (1 - FRICTION) : 0;
-		this->y = 10; // This will be replaced by a more permanent test later
+		if (collisionState == COLLIDED_BELOW) this->y += 2 * BLOCK_COLLISION_BUFFER;
+		if (collisionState == COLLIDED_ABOVE) this->y -= 2 * BLOCK_COLLISION_BUFFER;
+		if (collisionState == COLLIDED_LEFT)  this->x += 2 * BLOCK_COLLISION_BUFFER;
+		if (collisionState == COLLIDED_RIGHT) this->x -= 2 * BLOCK_COLLISION_BUFFER;
 	}
 
 	// Gravity

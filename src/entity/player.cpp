@@ -8,6 +8,7 @@ Player::Player(M2DWorld& world)
 	world.i_window->player = this;
 
 	height = 2;
+	width = 0.2;
 
 	headLeft.setTexture(HEAD_TEX_LEFT, true);
 	headRight.setTexture(HEAD_TEX_RIGHT, true);
@@ -44,6 +45,30 @@ void Player::setCenter() {
 	// Set the window to be centered on the player
 	world->i_window->xShift =  x*200 + 100 - WN_WIDTH / 2;
 	world->i_window->yShift = -y*200 + 100 - WN_HEIGHT / 2;
+}
+
+bool Player::collidedBelow() {
+	return world->blocks[(int) x][(int) (y - BLOCK_COLLISION_BUFFER)]->str_type != "air";
+}
+
+bool Player::collidedAbove() {
+	return world->blocks[(int) x][(int) (y - BLOCK_COLLISION_BUFFER) + 2]->str_type != "air";
+}
+
+bool Player::collidedLeft() {
+	// Check blocks to the lower left and to the upper left
+	return (
+		world->blocks[(int) x - 1][(int) (y - BLOCK_COLLISION_BUFFER) + 1]->str_type != "air" ||
+		world->blocks[(int) x - 1][(int) (y - BLOCK_COLLISION_BUFFER) + 2]->str_type != "air"
+	);
+}
+
+bool Player::collidedRight() {
+	// Check blocks to the lower right and to the upper right
+	return (
+		world->blocks[(int) std::floor(x + 0.2)][(int) (y - BLOCK_COLLISION_BUFFER) + 1]->str_type != "air" ||
+		world->blocks[(int) std::floor(x + 0.2)][(int) (y - BLOCK_COLLISION_BUFFER) + 2]->str_type != "air"
+	);
 }
 
 void Player::update(){
