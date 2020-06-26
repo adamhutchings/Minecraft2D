@@ -7,9 +7,9 @@ M2DWorld::M2DWorld(MWindow& window) {
 	i_window = &window;
 
 	// Double array
-	blocks = new Block** [10];
+	blocks = new Block** [WORLD_WIDTH];
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < WORLD_WIDTH; i++) {
 		blocks[i] = new Block* [WORLD_HEIGHT_LIMIT];
 		for (int j = 0; j < WORLD_HEIGHT_LIMIT; j++) {
 			// Some really basic world gen - to change later
@@ -27,7 +27,7 @@ M2DWorld::M2DWorld(MWindow& window) {
 }
 
 void M2DWorld::render(MWindow& target) const {
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < WORLD_WIDTH; i++) {
 		for (int j = 0; j < 10; j++) {
 			blocks[i][j]->render(target);
 		}
