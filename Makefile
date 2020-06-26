@@ -48,8 +48,3 @@ GCC = g++ -std=c++17
 ./bin/objects/main.o : ./src/main.cpp ./src/main.h ./src/world/block.h ./src/render/m_window.h ./src/world/world.h \
 ./src/entity/player.h ./src/gui/m_button.h
 	$(GCC) -c ./src/main.cpp -o ./bin/objects/main.o
-
-
-
-
-
