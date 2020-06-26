@@ -16,6 +16,7 @@ class MWindow;
 
 class Block : public Renderable {
 public:
+	std::string str_type;
 	Block(MWindow& window, int x, int y, std::string type="");
 	void render(MWindow& window) const override;
 };

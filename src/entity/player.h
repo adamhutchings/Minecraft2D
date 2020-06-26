@@ -37,6 +37,12 @@ public:
 	void updateSpritePosition(MWindow& relativeTo) override;
 	int getSpawnHealth() override;
 	void setCenter();
+
+	bool collidedBelow() override;
+	bool collidedAbove() override;
+	bool collidedLeft()  override;
+	bool collidedRight() override;
+
 	void update() override;
 };
 
