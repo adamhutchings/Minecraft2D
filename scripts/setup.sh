@@ -1,3 +1,4 @@
+# Make the folders where binaries will reside
 mkdir -p ./bin
 mkdir -p ./bin/objects
 mkdir -p ./bin/objects/entity
