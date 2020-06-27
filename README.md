@@ -11,7 +11,7 @@ GNU `make` version 3.81
 
 Setup
 -----
-`sh scripts/setup.sh`
+`./scripts/setup.sh`
 
 Compile
 -------
