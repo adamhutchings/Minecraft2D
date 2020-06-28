@@ -43,6 +43,12 @@ public:
 	bool collidedLeft()  override;
 	bool collidedRight() override;
 
+	// For moving about
+	void moveLeft();
+	void moveRight();
+	void jump();
+	void sneak();
+
 	void update() override;
 };
 

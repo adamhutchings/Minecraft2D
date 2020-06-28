@@ -40,15 +40,15 @@ void MWindow::cycle() {
 		// Key presses
 		if (state == MAIN_GAME) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player->isCollided()) {
-				if (player) player->dy += JUMP_HEIGHT;
+				if (player) player->jump();
 			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
 				sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
-				// Sneak later, but not yet
+				if (player) player->sneak();
 			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-				if (player) player->dx = WALK_SPEED;
+				if (player) player->moveRight();
 				player->facing = true;
 			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-				if (player) player->dx = -WALK_SPEED;
+				if (player) player->moveLeft();
 				player->facing = false;
 			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 				escape(*this);
