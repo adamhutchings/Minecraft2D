@@ -50,6 +50,10 @@ void MWindow::cycle() {
 			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 				if (player) player->moveLeft();
 				player->facing = false;
+			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+				if (player->facing && player) player->moveRight(); else if (player) player->moveLeft();
+			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+				if (player->facing && player) player->moveLeft(); else if (player) player->moveRight();
 			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 				escape(*this);
 			}
