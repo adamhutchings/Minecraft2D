@@ -25,4 +25,6 @@ Controls
 --------
 d - right
 a - left
+w - direction player faces
+s - direction behind player
 space - jump

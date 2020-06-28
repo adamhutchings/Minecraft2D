@@ -71,6 +71,23 @@ bool Player::collidedRight() {
 	);
 }
 
+// Movement
+void Player::moveLeft() {
+	this->dx = -WALK_SPEED;
+}
+
+void Player::moveRight() {
+	this->dx = WALK_SPEED;
+}
+
+void Player::jump() {
+	this->dy += JUMP_HEIGHT;
+}
+
+void Player::sneak() {
+	// Nothing needed here for now
+}
+
 void Player::update(){
 	Entity::update();
 
