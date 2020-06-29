@@ -19,6 +19,7 @@ public:
 	std::string str_type;
 	Block(MWindow& window, int x, int y, std::string type="");
 	void render(MWindow& window) const override;
+	void loadTexture(std::string tex);
 };
 
 #endif // M_BLOCK_H
