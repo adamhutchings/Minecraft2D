@@ -33,3 +33,8 @@ void M2DWorld::render(MWindow& target) const {
 		}
 	}
 }
+
+void M2DWorld::b_break(int xPos, int yPos) {
+	delete (blocks[xPos][yPos]);
+	blocks[xPos][yPos] = new Block(*i_window, xPos, yPos, "air");
+}
