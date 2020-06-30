@@ -36,8 +36,8 @@ GCC = g++ -std=c++17
 ./bin/objects/world/world.o : ./src/world/world.cpp ./src/render/m_window.h ./src/world/block.h ./src/render/renderable.h
 	$(GCC) -c ./src/world/world.cpp -o ./bin/objects/world/world.o
 
-./bin/objects/item/item_stack.o : ./src/item/item_stack.cpp ./src/item/item_stack.cpp \
-./src/render/renderable.h ./src/renderable/m_window.h
+./bin/objects/item/item_stack.o : ./src/item/item_stack.cpp ./src/item/item_stack.h \
+./src/render/renderable.h ./src/render/m_window.h
 	$(GCC) -c ./src/item/item_stack.cpp -o ./bin/objects/item/item_stack.o
 
 ./bin/objects/item/inventory.o : ./src/item/inventory.cpp ./src/item/inventory.h ./src/item/item_stack.h \
