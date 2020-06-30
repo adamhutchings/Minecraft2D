@@ -1,6 +1,7 @@
 #include "item_stack.h"
 
 ItemStack::ItemStack(std::string name, int count) {
+	itemStackState = ItemStackState::ENTITY;
 	this->name = name;
 	this->count = count;
 }

@@ -5,12 +5,19 @@
 
 #include <string>
 
+enum ItemStackState {
+	ENTITY,
+	BLOCK,
+	INVENTORY
+};
+
 // Represents a stack of items in the inventory.
 
-class ItemStack {
+class ItemStack : public Renderable {
 public:
 	std::string name;
 	int count;
+	ItemStackState itemStackState;
 
 	ItemStack(std::string name, int count=1);
 
