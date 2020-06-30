@@ -1,6 +1,7 @@
 #include "item_stack.h"
 
-ItemStack::ItemStack(std::string name, int count) {
+ItemStack::ItemStack(MWindow& window, std::string name, int count)
+: Renderable(window) {
 	itemStackState = ItemStackState::ENTITY;
 	this->name = name;
 	this->count = count;
@@ -16,4 +17,8 @@ bool ItemStack::mergeWith(ItemStack& i) {
 		this->count = ITEM_MAX_COUNT;
 		return false;
 	}
+}
+
+void ItemStack::render(MWindow& window) const {
+	// We'll get to this later
 }

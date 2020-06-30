@@ -4,6 +4,8 @@
 #define ITEM_MAX_COUNT 64
 
 #include <string>
+#include "../render/renderable.h"
+#include "../render/m_window.h"
 
 enum ItemStackState {
 	ENTITY,
@@ -19,10 +21,13 @@ public:
 	int count;
 	ItemStackState itemStackState;
 
-	ItemStack(std::string name, int count=1);
+	ItemStack(MWindow& window, std::string name, int count=1);
 
 	// When two item stacks combine (on ground or in-inventory)
 	bool mergeWith(ItemStack& i);
+
+	void render(MWindow& window) const override;
+
 };
 
 #endif // ITEM_STACK_H

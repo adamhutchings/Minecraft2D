@@ -17,6 +17,7 @@ inline sf::Texture HEAD_TEX_RIGHT;
 inline sf::Texture BODY_TEX;
 
 class M2DWorld;
+class PlayerInventory;
 
 sf::Vector2f& findSpawnLocation(M2DWorld& world);
 
