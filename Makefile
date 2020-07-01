@@ -30,14 +30,15 @@ GCC = g++ -std=c++17
 ./bin/objects/render/renderable.o : ./src/render/renderable.cpp ./src/render/renderable.h ./src/render/m_window.h
 	$(GCC) -c ./src/render/renderable.cpp -o ./bin/objects/render/renderable.o
 
-./bin/objects/world/block.o : ./src/world/block.cpp ./src/world/block.h ./src/render/m_window.h ./src/render/renderable.h
+./bin/objects/world/block.o : ./src/world/block.cpp ./src/world/block.h ./src/render/m_window.h ./src/render/renderable.h \
+./src/item/item_stack.h
 	$(GCC) -c ./src/world/block.cpp -o ./bin/objects/world/block.o
 
 ./bin/objects/world/world.o : ./src/world/world.cpp ./src/render/m_window.h ./src/world/block.h ./src/render/renderable.h
 	$(GCC) -c ./src/world/world.cpp -o ./bin/objects/world/world.o
 
 ./bin/objects/item/item_stack.o : ./src/item/item_stack.cpp ./src/item/item_stack.h \
-./src/render/renderable.h ./src/render/m_window.h
+./src/render/renderable.h ./src/render/m_window.h ./src/world/block.h
 	$(GCC) -c ./src/item/item_stack.cpp -o ./bin/objects/item/item_stack.o
 
 ./bin/objects/item/inventory.o : ./src/item/inventory.cpp ./src/item/inventory.h ./src/item/item_stack.h \
