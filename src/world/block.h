@@ -6,6 +6,7 @@
 #include <string>
 #include "../render/m_window.h"
 #include "../render/renderable.h"
+#include "../item/item_stack.h"
 
 inline sf::Texture GRASS_TEX;
 inline sf::Texture DIRT_TEX;
@@ -13,13 +14,15 @@ inline sf::Texture STONE_TEX;
 inline sf::Texture DEFAULT_TEX; // For an errored-out block
 
 class MWindow;
+class ItemStack;
 
 class Block : public Renderable {
 public:
 	std::string str_type;
+	ItemStack* itemStack;
 	Block(MWindow& window, int x, int y, std::string type="");
 	void render(MWindow& window) const override;
-	void loadTexture(std::string tex);
+	void updateSpritePosition(MWindow& relativeTo) override;
 };
 
 #endif // M_BLOCK_H

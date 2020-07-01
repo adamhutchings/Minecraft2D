@@ -1,10 +1,11 @@
 #include "item_stack.h"
 
-ItemStack::ItemStack(MWindow& window, std::string name, int count)
-: Renderable(window) {
+ItemStack::ItemStack(std::string name, int count) {
 	itemStackState = ItemStackState::ENTITY;
 	this->name = name;
 	this->count = count;
+	loadTexture(name);
+	spr.setPosition(0, 0);
 }
 
 bool ItemStack::mergeWith(ItemStack& i) {
@@ -19,6 +20,16 @@ bool ItemStack::mergeWith(ItemStack& i) {
 	}
 }
 
-void ItemStack::render(MWindow& window) const {
-	// We'll get to this later
+void ItemStack::loadTexture(std::string tex) {
+	if (tex == "grass") {
+		spr.setTexture(GRASS_TEX, true);
+	} else if (tex == "dirt") {
+		spr.setTexture(DIRT_TEX, true);
+	} else if (tex == "stone") {
+		spr.setTexture(STONE_TEX, true);
+	} else if (tex == "air") {
+		// No texture for air
+	} else {
+		spr.setTexture(DEFAULT_TEX, true);
+	}
 }
