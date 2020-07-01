@@ -40,9 +40,9 @@ void Entity::update() {
 		// Friction doesn't just plain decrease, entities need to stop
 		this->dx *= (this->dx > 0.01 || this->dx < -0.01) ? (1 - FRICTION) : 0;
 		if (collisionState == COLLIDED_BELOW) this->y += 2 * BLOCK_COLLISION_BUFFER;
-		if (collisionState == COLLIDED_ABOVE) this->y -= 2 * BLOCK_COLLISION_BUFFER;
-		if (collisionState == COLLIDED_LEFT)  this->x += 2 * BLOCK_COLLISION_BUFFER;
-		if (collisionState == COLLIDED_RIGHT) this->x -= 2 * BLOCK_COLLISION_BUFFER;
+		else if (collisionState == COLLIDED_ABOVE) this->y -= 2 * BLOCK_COLLISION_BUFFER;
+		else if (collisionState == COLLIDED_LEFT)  this->x += 2 * BLOCK_COLLISION_BUFFER;
+		else if (collisionState == COLLIDED_RIGHT) this->x -= 2 * BLOCK_COLLISION_BUFFER;
 	}
 
 	// Gravity
