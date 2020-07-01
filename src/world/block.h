@@ -7,6 +7,7 @@
 #include "../render/m_window.h"
 #include "../render/renderable.h"
 #include "../item/item_stack.h"
+#include "world.h"
 
 inline sf::Texture GRASS_TEX;
 inline sf::Texture DIRT_TEX;
@@ -23,6 +24,8 @@ public:
 	Block(MWindow& window, int x, int y, std::string type="");
 	void render(MWindow& window) const override;
 	void updateSpritePosition(MWindow& relativeTo) override;
+	ItemStack* destroy();
+	void setTypeTo(std::string type);
 };
 
 #endif // M_BLOCK_H

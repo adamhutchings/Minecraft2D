@@ -31,7 +31,7 @@ GCC = g++ -std=c++17
 	$(GCC) -c ./src/render/renderable.cpp -o ./bin/objects/render/renderable.o
 
 ./bin/objects/world/block.o : ./src/world/block.cpp ./src/world/block.h ./src/render/m_window.h ./src/render/renderable.h \
-./src/item/item_stack.h
+./src/item/item_stack.h ./src/world/world.h
 	$(GCC) -c ./src/world/block.cpp -o ./bin/objects/world/block.o
 
 ./bin/objects/world/world.o : ./src/world/world.cpp ./src/render/m_window.h ./src/world/block.h ./src/render/renderable.h
