@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "entity.h"
 #include "../render/m_window.h"
 #include "../main.h"
@@ -11,6 +12,11 @@
 // Hardcoded player head coords for now
 #define PLAYER_HEAD_X 1050
 #define PLAYER_HEAD_Y 916
+
+#define PLAYER_BODY_WIDTH 46.0
+#define PLAYER_BODY_HEIGHT 280.0
+#define PLAYER_HEAD_WIDTH 80.0
+#define PLAYER_HEAD_HEIGHT 80.0
 
 inline sf::Texture HEAD_TEX_LEFT;
 inline sf::Texture HEAD_TEX_RIGHT;
@@ -44,6 +50,12 @@ public:
 	bool collidedLeft()  override;
 	bool collidedRight() override;
 
+	// These functions return points to check for collision.
+	sf::Vector2f** getBottomCollisionPoints();
+	sf::Vector2f** getTopCollisionPoints();
+	sf::Vector2f** getLeftCollisionPoints();
+	sf::Vector2f** getRightCollisionPoints();
+
 	// For moving about
 	void moveLeft();
 	void moveRight();
@@ -52,5 +64,7 @@ public:
 
 	void update() override;
 };
+
+sf::Vector2i* floorCoords(sf::Vector2f* coords);
 
 #endif // PLAYER_H
