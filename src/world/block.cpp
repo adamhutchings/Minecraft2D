@@ -7,24 +7,31 @@ Block::Block(MWindow& window, int x, int y, std::string type)
 
 	str_type = type;
 
+	itemStack = new ItemStack(type);
+
 	this->x = x;
 	this->y = y;
-
-	if (type == "grass") {
-		spr.setTexture(GRASS_TEX, true);
-	} else if (type == "dirt") {
-		spr.setTexture(DIRT_TEX, true);
-	} else if (type == "stone") {
-		spr.setTexture(STONE_TEX, true);
-	} else if (type == "air") {
-		// No texture for air
-	} else {
-		spr.setTexture(DEFAULT_TEX, true);
-	}
-
-	spr.setPosition(0, 0);
 }
 
 void Block::render(MWindow& target) const {
-	target.draw(spr);
+	if (itemStack->name != "air") // Don't bother rendering for air
+	target.draw(itemStack->spr);
+}
+
+void Block::updateSpritePosition(MWindow& relativeTo) {
+	itemStack->spr.setPosition(x*200 + 100 - relativeTo.xShift,  -y*200 + 100 - relativeTo.yShift);
+}
+
+ItemStack* Block::destroy() {
+	ItemStack* is = new ItemStack(itemStack->name);
+	setTypeTo("air");
+	return is;
+}
+
+void Block::setTypeTo(std::string type) {
+	str_type = type;
+	itemStack->name = type;
+	if (type != "air") {
+		itemStack->loadTexture(type);
+	}
 }

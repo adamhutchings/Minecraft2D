@@ -1,6 +1,7 @@
 #ifndef M_WINDOW_H
 #define M_WINDOW_H
 
+#include <cmath>
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
@@ -9,6 +10,10 @@
 #define MAIN_MENU 0
 #define MAIN_GAME 1
 #define ESCAPED 2
+
+#define PLAYER_REACH 5
+
+#define BLOCK_BREAK_COMPARISONS 100
 
 // Includes are weird
 class Renderable;
@@ -50,5 +55,8 @@ public:
 void changeState(MWindow& window, bool escape = true);
 void escape(MWindow& window);
 void returnToGame(MWindow& window);
+
+sf::Vector2f* screenToBlock(MWindow& relativeTo, sf::Vector2f& coords);
+void breakBlock(MWindow& window, int xPos, int yPos);
 
 #endif // M_WINDOW_H

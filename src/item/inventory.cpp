@@ -1,6 +1,6 @@
 #include "inventory.h"
 
-InventorySection::InventorySection(int width) {
+InventorySection::InventorySection(MWindow& renderOn, int width) {
 	for (int i = 0; i < width; i++) {
 		this->contents[width] = new ItemStack("empty", 0);
 	}
@@ -17,6 +17,6 @@ void InventorySection::addItem(ItemStack& is, int pos) {
 	}
 }
 
-PlayerInventory::PlayerInventory() {
-	sections[0] = new InventorySection(9); // Just the hotbar
+PlayerInventory::PlayerInventory(Player* p) {
+	sections[0] = new InventorySection(*(p->world->i_window), 9); // Just the hotbar
 }

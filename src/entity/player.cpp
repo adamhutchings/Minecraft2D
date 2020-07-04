@@ -2,7 +2,7 @@
 #include "../world/world.h"
 
 Player::Player(M2DWorld& world)
-: Entity(&world, findSpawnLocation(world).x, findSpawnLocation(world).y)
+: Entity(&world, findSpawnLocation(world).x, findSpawnLocation(world).y + 0.1)
 , inventory() {
 
 	world.i_window->player = this;
@@ -47,28 +47,164 @@ void Player::setCenter() {
 	world->i_window->yShift = -y*200 + 100 - WN_HEIGHT / 2;
 }
 
+sf::Vector2f** Player::getBottomCollisionPoints() {
+	sf::Vector2f** result = new sf::Vector2f*[2];
+	result[0] = new sf::Vector2f(x, y + (BLOCK_COLLISION_BUFFER));
+	result[1] = new sf::Vector2f(x + (PLAYER_BODY_WIDTH / 200), y);
+	return result;
+}
+sf::Vector2f** Player::getTopCollisionPoints() {
+	sf::Vector2f** result = new sf::Vector2f*[2];
+	if (facing) {
+		// Left and right top points of head facing right
+		result[0] = new sf::Vector2f(
+			x, y + ((PLAYER_BODY_HEIGHT + PLAYER_HEAD_HEIGHT) / 200))
+		;
+		result[1] = new sf::Vector2f(
+			x + (PLAYER_HEAD_WIDTH / 200), y + ((PLAYER_BODY_HEIGHT + PLAYER_HEAD_HEIGHT) / 200))
+		;
+	} else {
+		// Right and left top points of head facing left
+		result[0] = new sf::Vector2f(
+			x + (PLAYER_BODY_WIDTH / 200), y + ((PLAYER_BODY_HEIGHT + PLAYER_HEAD_HEIGHT) / 200))
+		;
+		result[1] = new sf::Vector2f(
+			x + ((PLAYER_BODY_WIDTH - PLAYER_HEAD_WIDTH)/200),
+			y + ((PLAYER_BODY_HEIGHT + PLAYER_HEAD_HEIGHT) / 200))
+		;
+	}
+	return result;
+}
+sf::Vector2f** Player::getLeftCollisionPoints() {
+	sf::Vector2f** result = new sf::Vector2f*[4];
+	result[0] = new sf::Vector2f(
+		x, y + (PLAYER_BODY_HEIGHT / 200) + 0.1
+	); // Top left corner of body
+	result[1] = new sf::Vector2f(x, y + (0.1)); // Bottom left corner of body
+	if (facing) {
+		// Top left corner of head
+		result[2] = new sf::Vector2f(
+		x, y + (PLAYER_BODY_HEIGHT / 200) + 0.1
+		); // Top left corner of body
+		result[3] = new sf::Vector2f(
+			x, y + ((PLAYER_BODY_HEIGHT + PLAYER_HEAD_HEIGHT) / 200) + 0.1
+		);
+	} else {
+		// Bottom left corner of head, top left corner of head
+		result[2] =
+			new sf::Vector2f(
+				x + ((PLAYER_BODY_WIDTH - PLAYER_HEAD_WIDTH) / 200),
+				y + ((PLAYER_BODY_HEIGHT) / 200) + 0.1
+			)
+		;
+		result[3] =
+			new sf::Vector2f(
+				x + ((PLAYER_BODY_WIDTH - PLAYER_HEAD_WIDTH) / 200),
+				y + ((PLAYER_BODY_HEIGHT + PLAYER_HEAD_HEIGHT) / 200) + 0.1
+			)
+		;
+	}
+	return result;
+}
+sf::Vector2f** Player::getRightCollisionPoints() {
+	sf::Vector2f** result = new sf::Vector2f*[4];
+	result[0] = new sf::Vector2f(
+		x + ((PLAYER_BODY_WIDTH) / 200),
+		y + (PLAYER_BODY_HEIGHT / 200) + 0.1
+	); // Top right corner of body
+	result[1] = new sf::Vector2f(
+		x + ((PLAYER_BODY_WIDTH) / 200), y + 0.1
+	); // Bottom right corner of body
+	if (facing) {
+		// Top right corner of head
+		result[2] = new sf::Vector2f(
+			x + ((PLAYER_HEAD_WIDTH) / 200),
+			y + ((PLAYER_BODY_HEIGHT + PLAYER_HEAD_HEIGHT) / 200 + 0.1
+		));
+		result[3] = new sf::Vector2f(
+			x + ((PLAYER_BODY_WIDTH) / 200),
+			y + (PLAYER_BODY_HEIGHT / 200) + 0.1
+		); // Top right corner of body
+	} else {
+		// Bottom right corner of head, top right corner of head
+		result[2] = 
+			new sf::Vector2f(
+				x + ((PLAYER_HEAD_WIDTH) / 200),
+				y + ((PLAYER_BODY_HEIGHT) / 200) + 0.1
+			)
+		;
+		result[3] = 
+			new sf::Vector2f(
+				x + ((PLAYER_HEAD_WIDTH) / 200),
+				y + ((PLAYER_BODY_HEIGHT + PLAYER_HEAD_HEIGHT) / 200) + 0.1
+			)
+		;
+	}
+	return result;
+}
+
 bool Player::collidedBelow() {
-	return world->blocks[(int) x][(int) (y - BLOCK_COLLISION_BUFFER)]->str_type != "air";
+	sf::Vector2f** colPoints = getBottomCollisionPoints();
+	sf::Vector2f* point;
+	for (int i = 0; i < 2; i++) {
+		point = colPoints[i];
+		if (!(point->y > WORLD_HEIGHT_LIMIT + 1 ||
+			point->y < 0 ||
+			point->x > WORLD_WIDTH + 1 ||
+			point->x < 0
+		)) {
+			if (world->blocks[floorCoords(point)->x][floorCoords(point)->y]->str_type != "air") return true;
+		}
+	}
+	return false;
 }
 
 bool Player::collidedAbove() {
-	return world->blocks[(int) x][(int) (y - BLOCK_COLLISION_BUFFER) + 2]->str_type != "air";
+	sf::Vector2f** colPoints = getTopCollisionPoints();
+	sf::Vector2f* point;
+	for (int i = 0; i < 2; i++) {
+		point = colPoints[i];
+		if (!(point->y > WORLD_HEIGHT_LIMIT + 1 ||
+			point->y < 0 ||
+			point->x > WORLD_WIDTH + 1 ||
+			point->x < 0
+		)) {
+			if (world->blocks[floorCoords(point)->x][floorCoords(point)->y]->str_type != "air") return true;
+		}
+	}
+	return false;
 }
 
 bool Player::collidedLeft() {
-	// Check blocks to the lower left and to the upper left
-	return (
-		world->blocks[(int) x - 1][(int) (y - BLOCK_COLLISION_BUFFER) + 1]->str_type != "air" ||
-		world->blocks[(int) x - 1][(int) (y - BLOCK_COLLISION_BUFFER) + 2]->str_type != "air"
-	);
+	sf::Vector2f** colPoints = getLeftCollisionPoints();
+	sf::Vector2f* point;
+	for (int i = 0; i < 4; i++) {
+		point = colPoints[i];
+		if (!(point->y > WORLD_HEIGHT_LIMIT + 1 ||
+			point->y < 0 ||
+			point->x > WORLD_WIDTH + 1 ||
+			point->x < 0
+		)) {
+			if (world->blocks[floorCoords(point)->x][floorCoords(point)->y]->str_type != "air") return true;
+		}
+	}
+	return false;
 }
 
 bool Player::collidedRight() {
-	// Check blocks to the lower right and to the upper right
-	return (
-		world->blocks[(int) std::floor(x + 0.2)][(int) (y - BLOCK_COLLISION_BUFFER) + 1]->str_type != "air" ||
-		world->blocks[(int) std::floor(x + 0.2)][(int) (y - BLOCK_COLLISION_BUFFER) + 2]->str_type != "air"
-	);
+	sf::Vector2f** colPoints = getRightCollisionPoints();
+	sf::Vector2f* point;
+	for (int i = 0; i < 4; i++) {
+		point = colPoints[i];
+		if (!(point->y > WORLD_HEIGHT_LIMIT + 1 ||
+			point->y < 0 ||
+			point->x > WORLD_WIDTH + 1 ||
+			point->x < 0
+		)) {
+			if (world->blocks[floorCoords(point)->x][floorCoords(point)->y]->str_type != "air") return true;
+		}
+	}
+	return false;
 }
 
 // Movement
@@ -117,6 +253,10 @@ void Player::update(){
 		headRight.setRotation(- rotation * 360 / (2 * pi));
 	}
 
+}
+
+sf::Vector2i* floorCoords(sf::Vector2f* coords) {
+	return new sf::Vector2i((int) std::floor(coords->x), (int) std::floor(coords->y));
 }
 
 sf::Vector2f& findSpawnLocation(M2DWorld& world) {

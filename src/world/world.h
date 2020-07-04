@@ -25,6 +25,9 @@ public:
 
 	// Renders every component block
 	void render(MWindow& target) const;
+
+	// Breaking a block
+	void b_break(int xPos, int yPos);
 };
 
 #endif // M2D_WORLD_H
