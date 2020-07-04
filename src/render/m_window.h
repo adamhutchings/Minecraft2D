@@ -46,6 +46,10 @@ public:
 	// The main loop
 	void cycle();
 
+	// Some functions just to make stuff easier to handle
+	void handleWindowEvents(sf::Event event);
+	void handleKeyPresses();
+
 	void add(Renderable* obj);
 
 	void onClick(int x, int y);
