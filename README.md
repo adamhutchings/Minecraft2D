@@ -24,12 +24,12 @@ Run
 
 Controls
 --------
-d - right
-a - left
-w - direction player faces
-s - direction behind player
-space - jump
-left click - break block
+d - right <br/>
+a - left <br/>
+w - direction player faces <br/>
+s - direction behind player <br/>
+space - jump <br/>
+left click - break block <br/>
 escape - go to escape menu
 
 Notes
