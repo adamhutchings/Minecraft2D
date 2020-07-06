@@ -37,3 +37,6 @@ Notes
 There are several known bugs, like that block breaking sometimes doesn't work
 or that occasionally on startup nothing appears when you make a new world. This
 isn't nearly perfect yet. Please report bugs using an issue. Thanks!
+
+Also, please excuse extra `#include`s in implementation files. Stuff fails
+to compile when I omit them, for some reason.
