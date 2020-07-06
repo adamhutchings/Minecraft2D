@@ -8,6 +8,7 @@ File path for SFML library is currently set to `/usr/local/Cellar/sfml/2.5.1`.
 If different on your machine, change the `SFML_PATH` variable in `Makefile`.
 
 GNU `make` version 3.81
+`g++` supporting C++17
 
 Setup
 -----
@@ -28,3 +29,11 @@ a - left
 w - direction player faces
 s - direction behind player
 space - jump
+left click - break block
+escape - go to escape menu
+
+Notes
+-----
+There are several known bugs, like that block breaking sometimes doesn't work
+or that occasionally on startup nothing appears when you make a new world. This
+isn't nearly perfect yet. Please report bugs using an issue. Thanks!
