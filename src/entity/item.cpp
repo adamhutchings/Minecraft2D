@@ -15,7 +15,7 @@ void EntityItem::render(MWindow& window) const {
 	window.draw(itemStackObj->spr);
 }
 bool EntityItem::collidedBelow() {
-	return false;
+	return world->blocks[(int) floor(x)][(int) floor(y - 0.3)]->str_type != "air";
 }
 
 bool EntityItem::collidedAbove() {
@@ -32,5 +32,5 @@ bool EntityItem::collidedRight() {
 
 
 void EntityItem::updateSpritePosition(MWindow& relativeTo) {
-	itemStackObj->spr.setPosition(x*200 + 40 - relativeTo.xShift,  -y*200 + 40 - relativeTo.yShift);
+	itemStackObj->spr.setPosition(x*200 + 60 - relativeTo.xShift, -y*200 + 260 - relativeTo.yShift);
 }

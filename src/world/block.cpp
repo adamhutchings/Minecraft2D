@@ -26,7 +26,7 @@ void Block::updateSpritePosition(MWindow& relativeTo) {
 EntityItem* Block::destroy(M2DWorld& world) {
 	ItemStack* is = new ItemStack(itemStack->name, ItemStackState::ENTITY);
 	setTypeTo("air");
-	return new EntityItem(&world, is, x + 0.5, y - 0.5);
+	return new EntityItem(&world, is, x + 0.5, y + 0.5);
 }
 
 void Block::setTypeTo(std::string type) {
