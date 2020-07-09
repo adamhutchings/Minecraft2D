@@ -1,7 +1,7 @@
 #include "item_stack.h"
 
-ItemStack::ItemStack(std::string name, int count) {
-	itemStackState = ItemStackState::ENTITY;
+ItemStack::ItemStack(std::string name, ItemStackState i, int count) {
+	itemStackState = i;
 	this->name = name;
 	this->count = count;
 	loadTexture(name);

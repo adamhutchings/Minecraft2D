@@ -2,7 +2,7 @@
 
 InventorySection::InventorySection(MWindow& renderOn, int width) {
 	for (int i = 0; i < width; i++) {
-		this->contents[width] = new ItemStack("empty", 0);
+		this->contents[width] = new ItemStack("empty", ItemStackState::INVENTORY, 0);
 	}
 }
 

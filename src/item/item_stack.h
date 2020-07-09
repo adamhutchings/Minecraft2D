@@ -23,7 +23,7 @@ public:
 	int count;
 	ItemStackState itemStackState;
 
-	ItemStack(std::string name, int count=1);
+	ItemStack(std::string name, ItemStackState i, int count=1);
 
 	// When two item stacks combine (on ground or in-inventory)
 	bool mergeWith(ItemStack& i);
