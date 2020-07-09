@@ -106,10 +106,12 @@ void changeState(MWindow& window, bool escape) {
 	MButton* button;
 	Player* player;
 	Block* block;
+	Entity* entity;
 	for (Renderable* object : window.objects) {
 		button = dynamic_cast<MButton*>(object);
 		player = dynamic_cast<Player*>(object);
 		block = dynamic_cast<Block*>(object);
+		entity = dynamic_cast<Entity*>(object);
 		if (button) {
 			// There might be a better finding system here later, who knows
 			if (button->getString() == "Resume" || button->getString() == "Quit") {
@@ -119,6 +121,8 @@ void changeState(MWindow& window, bool escape) {
 			player->hidden = escape;
 		} else if (block) {
 			block->hidden = escape;
+		} else if (entity) {
+			entity->hidden = escape;
 		}
 	}
 }
