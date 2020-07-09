@@ -19,6 +19,7 @@ public:
 class Inventory {
 public:
 	InventorySection** sections;
+	void addItem(ItemStack& is);
 };
 
 class PlayerInventory : public Inventory {
