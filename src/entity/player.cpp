@@ -21,6 +21,8 @@ Player::Player(M2DWorld& world)
 
 	// Facing right by default
 	this->facing = true;
+
+	inventory = new PlayerInventory(this);
 }
 
 void Player::render(MWindow& window) const {
