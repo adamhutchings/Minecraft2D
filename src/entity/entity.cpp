@@ -52,3 +52,13 @@ void Entity::update() {
 		this->dy = 0;
 	}
 }
+
+void Entity::die() {
+	for (int i = 0; i < world->i_window->objects.size(); i++) {
+		if (world->i_window->objects.at(i) == this) {
+			world->i_window->objects.erase(world->i_window->objects.begin() + i);
+			delete this;
+			return;
+		}
+	}
+}
