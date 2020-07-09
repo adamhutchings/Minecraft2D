@@ -1,11 +1,14 @@
 #ifndef M_ITEM_H
 #define M_ITEM_H
 
+#include <cmath>
 #include <string>
 #include "entity.h"
 #include "../render/m_window.h"
 
 #define ITEM_HEALTH 4;
+
+#define PLAYER_ITEM_PICKUP_DISTANCE 1
 
 class ItemStack;
 
@@ -31,6 +34,9 @@ public:
 	bool collidedRight() override;
 
 	void updateSpritePosition(MWindow& relativeTo) override;
+
+	void update() override;
+
 };
 
 #endif // M_ITEM_H
