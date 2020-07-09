@@ -22,10 +22,11 @@ void Block::updateSpritePosition(MWindow& relativeTo) {
 	itemStack->spr.setPosition(x*200 + 100 - relativeTo.xShift,  -y*200 + 100 - relativeTo.yShift);
 }
 
-ItemStack* Block::destroy() {
+
+EntityItem* Block::destroy(M2DWorld& world) {
 	ItemStack* is = new ItemStack(itemStack->name, ItemStackState::ENTITY);
 	setTypeTo("air");
-	return is;
+	return new EntityItem(&world, is, x + 0.5, y - 0.5);
 }
 
 void Block::setTypeTo(std::string type) {

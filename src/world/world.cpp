@@ -34,6 +34,6 @@ void M2DWorld::render(MWindow& target) const {
 	}
 }
 
-void M2DWorld::b_break(int xPos, int yPos) {
-	blocks[xPos][yPos]->destroy();
+void M2DWorld::b_break(M2DWorld& world, int xPos, int yPos) {
+	blocks[xPos][yPos]->destroy(world);
 }

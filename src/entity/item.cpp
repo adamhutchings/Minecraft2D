@@ -1,9 +1,10 @@
 #include "item.h"
+#include "../item/item_stack.h"
 
 EntityItem::EntityItem(M2DWorld* o_world, ItemStack* is, double x, double y)
 : Entity(o_world, x, y) {
 	itemStackObj = is;
-	itemStackObj->itemStackState = ItemStackState::ENTITY;
+	itemStackObj->setItemState(ItemStackState::ENTITY);
 }
 
 int EntityItem::getSpawnHealth() {
@@ -11,5 +12,25 @@ int EntityItem::getSpawnHealth() {
 }
 
 void EntityItem::render(MWindow& window) const {
-	// Nothing for now
+	window.draw(itemStackObj->spr);
+}
+bool EntityItem::collidedBelow() {
+	return false;
+}
+
+bool EntityItem::collidedAbove() {
+	return false;
+}
+
+bool EntityItem::collidedLeft () {
+	return false;
+}
+
+bool EntityItem::collidedRight() {
+	return false;
+}
+
+
+void EntityItem::updateSpritePosition(MWindow& relativeTo) {
+	itemStackObj->spr.setPosition(x*200 + 40 - relativeTo.xShift,  -y*200 + 40 - relativeTo.yShift);
 }

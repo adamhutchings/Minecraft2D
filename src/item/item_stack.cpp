@@ -33,3 +33,16 @@ void ItemStack::loadTexture(std::string tex) {
 		spr.setTexture(DEFAULT_TEX, true);
 	}
 }
+
+ItemStackState& ItemStack::getItemState() {
+	return itemStackState;
+}
+
+void ItemStack::setItemState(const ItemStackState i) {
+	itemStackState = i;
+	if (i == ItemStackState::BLOCK) {
+		spr.setScale(1, 1);
+	} else if (i == ItemStackState::ENTITY || i == ItemStackState::INVENTORY) {
+		spr.setScale(ITEM_ENTITY_SIZE, ITEM_ENTITY_SIZE);
+	} // We'll have a proper size for INVENTORY later.
+}
