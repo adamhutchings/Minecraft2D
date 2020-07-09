@@ -18,6 +18,7 @@ public:
 // Abstract class
 class Inventory {
 public:
+	Inventory(int num);
 	InventorySection** sections;
 	void addItem(ItemStack& is);
 };
