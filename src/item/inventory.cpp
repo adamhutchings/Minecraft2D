@@ -47,6 +47,7 @@ void Inventory::addItem(ItemStack& is) {
 			itemStack = inventorySection->contents[j];
 			if ((itemStack->count == 0) && (itemStack->name == "empty")) {
 				inventorySection->addItem(is, j);
+				return;
 			}
 		}
 	}
