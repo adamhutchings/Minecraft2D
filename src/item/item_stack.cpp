@@ -14,7 +14,7 @@ bool ItemStack::mergeWith(ItemStack& i) {
 		this->count += i.count;
 		return true;
 	} else {
-		i.count -= (64 - this->count);
+		i.count -= (ITEM_MAX_COUNT - this->count);
 		this->count = ITEM_MAX_COUNT;
 		return false;
 	}
