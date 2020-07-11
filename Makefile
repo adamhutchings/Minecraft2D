@@ -1,7 +1,7 @@
 OBJECTS = ./bin/objects/entity/player.o ./bin/objects/entity/entity.o ./bin/objects/entity/item.o \
 ./bin/objects/render/m_window.o ./bin/objects/render/renderable.o ./bin/objects/world/block.o \
 ./bin/objects/world/world.o ./bin/objects/item/item_stack.o ./bin/objects/item/inventory.o \
-./bin/objects/gui/m_button.o ./bin/objects/main.o
+./bin/objects/gui/m_button.o ./bin/objects/main.o ./bin/objects/gui/hotbar_renderer.o
 
 SFML_PATH = /usr/local/Cellar/sfml/2.5.1
 
@@ -51,3 +51,6 @@ GCC = g++ -std=c++17
 ./bin/objects/main.o : ./src/main.cpp ./src/main.h ./src/world/block.h ./src/render/m_window.h ./src/world/world.h \
 ./src/entity/player.h ./src/gui/m_button.h
 	$(GCC) -c ./src/main.cpp -o ./bin/objects/main.o
+
+./bin/objects/gui/hotbar_renderer.o : ./src/gui/hotbar_renderer.cpp ./src/gui/hotbar_renderer.h
+	$(GCC) -c ./src/gui/hotbar_renderer.cpp -o ./bin/objects/gui/hotbar_renderer.o
