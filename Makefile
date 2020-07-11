@@ -49,8 +49,9 @@ GCC = g++ -std=c++17
 	$(GCC) -c ./src/gui/m_button.cpp -o ./bin/objects/gui/m_button.o
 
 ./bin/objects/main.o : ./src/main.cpp ./src/main.h ./src/world/block.h ./src/render/m_window.h ./src/world/world.h \
-./src/entity/player.h ./src/gui/m_button.h
+./src/entity/player.h ./src/gui/m_button.h ./src/gui/hotbar_renderer.h
 	$(GCC) -c ./src/main.cpp -o ./bin/objects/main.o
 
-./bin/objects/gui/hotbar_renderer.o : ./src/gui/hotbar_renderer.cpp ./src/gui/hotbar_renderer.h
+./bin/objects/gui/hotbar_renderer.o : ./src/gui/hotbar_renderer.cpp ./src/gui/hotbar_renderer.h \
+./src/render/m_window.h ./src/render/renderable.h ./src/item/inventory.h
 	$(GCC) -c ./src/gui/hotbar_renderer.cpp -o ./bin/objects/gui/hotbar_renderer.o
