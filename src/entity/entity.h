@@ -51,6 +51,8 @@ public:
 
 	virtual void update();
 
+	virtual void die();
+
 };
 
 #endif // M_ENTITY_H

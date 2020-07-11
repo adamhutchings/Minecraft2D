@@ -1,15 +1,21 @@
 #ifndef M_ITEM_H
 #define M_ITEM_H
 
+#include <cmath>
 #include <string>
 #include "entity.h"
-#include "../item/item_stack.h"
+#include "../render/m_window.h"
 
 #define ITEM_HEALTH 4;
+
+#define PLAYER_ITEM_PICKUP_DISTANCE 1
+
+class ItemStack;
 
 // Describes an item that can be picked up (later!)
 
 class EntityItem : public Entity {
+
 public:
 	
 	// Internal item
@@ -19,6 +25,18 @@ public:
 	EntityItem(M2DWorld* o_world, ItemStack* is, double x, double y);
 
 	int getSpawnHealth() override;
+
+	void render(MWindow& window) const override;
+
+	bool collidedBelow() override;
+	bool collidedAbove() override;
+	bool collidedLeft()  override;
+	bool collidedRight() override;
+
+	void updateSpritePosition(MWindow& relativeTo) override;
+
+	void update() override;
+
 };
 
 #endif // M_ITEM_H

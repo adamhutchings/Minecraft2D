@@ -28,35 +28,14 @@ void MWindow::cycle() {
 	while (isOpen()) {
 
 		// Handle window close event
-		while (pollEvent(event)) {
-			if (event.type == sf::Event::EventType::Closed) {
-				close();
-			}
-		}
+		handleWindowEvents(event);
 
 		// Centering
 		if (player) player->setCenter();
 
 		// Key presses
-		if (state == MAIN_GAME) {
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player->isCollided()) {
-				if (player) player->jump();
-			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
-				sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
-				if (player) player->sneak();
-			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-				if (player) player->moveRight();
-				player->facing = true;
-			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-				if (player) player->moveLeft();
-				player->facing = false;
-			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-				if (player->facing && player) player->moveRight(); else if (player) player->moveLeft();
-			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-				if (player->facing && player) player->moveLeft(); else if (player) player->moveRight();
-			} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-				escape(*this);
-			}
+		if (state == MAIN_GAME && hasFocus()) {
+			handleKeyPresses();
 		}
 
 		// Mouse presses
@@ -127,10 +106,12 @@ void changeState(MWindow& window, bool escape) {
 	MButton* button;
 	Player* player;
 	Block* block;
+	Entity* entity;
 	for (Renderable* object : window.objects) {
 		button = dynamic_cast<MButton*>(object);
 		player = dynamic_cast<Player*>(object);
 		block = dynamic_cast<Block*>(object);
+		entity = dynamic_cast<Entity*>(object);
 		if (button) {
 			// There might be a better finding system here later, who knows
 			if (button->getString() == "Resume" || button->getString() == "Quit") {
@@ -140,6 +121,8 @@ void changeState(MWindow& window, bool escape) {
 			player->hidden = escape;
 		} else if (block) {
 			block->hidden = escape;
+		} else if (entity) {
+			entity->hidden = escape;
 		}
 	}
 }
@@ -159,6 +142,35 @@ sf::Vector2f* screenToBlock(MWindow& relativeTo, sf::Vector2f& coords) {
 		 (coords.x + relativeTo.xShift - 100) / 200,
 		-(coords.y + relativeTo.yShift - 100) / 200
 	);
+}
+
+void MWindow::handleWindowEvents(sf::Event event) {
+	while (pollEvent(event)) {
+		if (event.type == sf::Event::EventType::Closed) {
+			close();
+		}
+	}
+}
+
+void MWindow::handleKeyPresses() {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player->isCollided()) {
+		if (player) player->jump();
+	} if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
+		if (player) player->sneak();
+	} if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		if (player) player->moveRight();
+		player->facing = true;
+	} if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		if (player) player->moveLeft();
+		player->facing = false;
+	} if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		if (player->facing && player) player->moveRight(); else if (player) player->moveLeft();
+	} if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+		if (player->facing && player) player->moveLeft(); else if (player) player->moveRight();
+	} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+		escape(*this);
+	}
 }
 
 void breakBlock(MWindow& window, int xPos, int yPos) {
@@ -186,8 +198,9 @@ void breakBlock(MWindow& window, int xPos, int yPos) {
 	for (int i = 0; i < BLOCK_BREAK_COMPARISONS; i++) {
 		int inX = (int) floor(incrementedPosition.x);
 		int inY = (int) floor(incrementedPosition.y);
+		if (inX > 0 && inX < WORLD_WIDTH && inY > 0 && inY < WORLD_HEIGHT_LIMIT)
 		if (window.player->world->blocks[inX][inY]->str_type != "air") {
-			window.player->world->b_break(inX, inY + 1);
+			window.player->world->b_break(*(window.player->world), inX, inY + 1);
 			return;
 		}
 		// Increment the position

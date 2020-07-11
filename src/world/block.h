@@ -8,6 +8,7 @@
 #include "../render/renderable.h"
 #include "../item/item_stack.h"
 #include "world.h"
+#include "../entity/item.h"
 
 inline sf::Texture GRASS_TEX;
 inline sf::Texture DIRT_TEX;
@@ -24,7 +25,7 @@ public:
 	Block(MWindow& window, int x, int y, std::string type="");
 	void render(MWindow& window) const override;
 	void updateSpritePosition(MWindow& relativeTo) override;
-	ItemStack* destroy();
+	EntityItem* destroy(M2DWorld& world);
 	void setTypeTo(std::string type);
 };
 

@@ -1,7 +1,7 @@
 #include "item_stack.h"
 
-ItemStack::ItemStack(std::string name, int count) {
-	itemStackState = ItemStackState::ENTITY;
+ItemStack::ItemStack(std::string name, ItemStackState i, int count) {
+	itemStackState = i;
 	this->name = name;
 	this->count = count;
 	loadTexture(name);
@@ -14,7 +14,7 @@ bool ItemStack::mergeWith(ItemStack& i) {
 		this->count += i.count;
 		return true;
 	} else {
-		i.count -= (64 - this->count);
+		i.count -= (ITEM_MAX_COUNT - this->count);
 		this->count = ITEM_MAX_COUNT;
 		return false;
 	}
@@ -32,4 +32,17 @@ void ItemStack::loadTexture(std::string tex) {
 	} else {
 		spr.setTexture(DEFAULT_TEX, true);
 	}
+}
+
+ItemStackState& ItemStack::getItemState() {
+	return itemStackState;
+}
+
+void ItemStack::setItemState(const ItemStackState i) {
+	itemStackState = i;
+	if (i == ItemStackState::BLOCK) {
+		spr.setScale(1, 1);
+	} else if (i == ItemStackState::ENTITY || i == ItemStackState::INVENTORY) {
+		spr.setScale(ITEM_ENTITY_SIZE, ITEM_ENTITY_SIZE);
+	} // We'll have a proper size for INVENTORY later.
 }
