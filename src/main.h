@@ -7,6 +7,7 @@
 #include "world/world.h"
 #include "entity/player.h"
 #include "gui/m_button.h"
+#include "gui/hotbar_renderer.h"
 
 // Window settings
 #define WN_WIDTH 2000
