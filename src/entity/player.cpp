@@ -28,6 +28,7 @@ Player::Player(M2DWorld& world)
 void Player::render(MWindow& window) const {
 	window.draw(facing ? headRight : headLeft); // Brilliance in a nutshell
 	window.draw(body);
+	renderHotbar(window, inventory->sections[0]); // Render the hotbar
 }
 
 void Player::updateSpritePosition(MWindow& relativeTo) {

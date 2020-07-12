@@ -8,6 +8,7 @@
 #include "../render/m_window.h"
 #include "../main.h"
 #include "../item/inventory.h"
+#include "../gui/hotbar_renderer.h"
 
 // Hardcoded player head coords for now
 #define PLAYER_HEAD_X 1050
