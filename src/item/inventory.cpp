@@ -1,6 +1,7 @@
 #include "inventory.h"
 
 InventorySection::InventorySection(MWindow& renderOn, int width) {
+	size = width;
 	this->contents = new ItemStack*[width];
 	for (int i = 0; i < width; i++) {
 		this->contents[i] = new ItemStack("empty", ItemStackState::INVENTORY, 0);
@@ -8,7 +9,7 @@ InventorySection::InventorySection(MWindow& renderOn, int width) {
 }
 
 void InventorySection::addItem(ItemStack& is, int pos) {
-	if ((pos >= sizeof(this->contents) / sizeof(this->contents[0]))
+	if ((pos >= size - 1)
 		|| ((is.name != contents[pos]->name) && contents[pos]->name != "empty")){
 		// Illegal move! Nooo!
 		return;
@@ -20,6 +21,7 @@ void InventorySection::addItem(ItemStack& is, int pos) {
 }
 
 Inventory::Inventory(int num) {
+	size = num;
 	sections = new InventorySection* [num];
 }
 
@@ -29,9 +31,9 @@ void Inventory::addItem(ItemStack& is) {
 	ItemStack* itemStack; // for later
 
 	// See if there are any matching item stacks
-	for (int i = 0; i < sizeof(sections) / sizeof(sections[0]); i++) {
+	for (int i = 0; i < size; i++) {
 		inventorySection = sections[i];
-		for (int j = 0; j < sizeof(inventorySection) / sizeof(inventorySection[0]); j++) {
+		for (int j = 0; j < inventorySection->size; j++) {
 			itemStack = inventorySection->contents[j];
 			if ((itemStack->count != 0) && (itemStack->name == is.name)) {
 				inventorySection->addItem(is, j);
@@ -41,9 +43,9 @@ void Inventory::addItem(ItemStack& is) {
 	}
 
 	// If there was no available slot
-	for (int i = 0; i < sizeof(sections) / sizeof(sections[0]); i++) {
+	for (int i = 0; i < size; i++) {
 		inventorySection = sections[i];
-		for (int j = 0; j < sizeof(inventorySection) / sizeof(inventorySection[0]); j++) {
+		for (int j = 0; j < inventorySection->size; j++) {
 			itemStack = inventorySection->contents[j];
 			if ((itemStack->count == 0) && (itemStack->name == "empty")) {
 				inventorySection->addItem(is, j);
