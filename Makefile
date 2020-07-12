@@ -13,7 +13,7 @@ GCC = g++ -std=c++17
 	$(GCC) $(OBJECTS) $(SFML_ARGS) -o ./bin/mc2d
 
 ./bin/objects/entity/player.o : ./src/entity/player.cpp ./src/entity/player.h ./src/world/world.h \
-./src/entity/entity.h ./src/render/m_window.h ./src/main.h ./src/item/inventory.h
+./src/entity/entity.h ./src/render/m_window.h ./src/main.h ./src/item/inventory.h ./src/gui/hotbar_renderer.h
 	$(GCC) -c ./src/entity/player.cpp -o ./bin/objects/entity/player.o
 
 ./bin/objects/entity/entity.o : ./src/entity/entity.cpp ./src/entity/entity.h \
@@ -53,5 +53,5 @@ GCC = g++ -std=c++17
 	$(GCC) -c ./src/main.cpp -o ./bin/objects/main.o
 
 ./bin/objects/gui/hotbar_renderer.o : ./src/gui/hotbar_renderer.cpp ./src/gui/hotbar_renderer.h \
-./src/render/m_window.h ./src/render/renderable.h ./src/item/inventory.h
+./src/render/m_window.h ./src/render/renderable.h ./src/item/inventory.h ./src/main.h
 	$(GCC) -c ./src/gui/hotbar_renderer.cpp -o ./bin/objects/gui/hotbar_renderer.o
