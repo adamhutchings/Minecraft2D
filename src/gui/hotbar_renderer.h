@@ -2,6 +2,7 @@
 #define M_HB_RENDERER_H
 
 #include <SFML/Graphics.hpp>
+#include <string>
 #include "../render/m_window.h"
 #include "../item/inventory.h"
 #include "../render/renderable.h"
@@ -14,8 +15,8 @@
 
 #define FONT_SIZE 20
 
-#define FONT_X_OFFSET 120
-#define FONT_Y_OFFSET 120
+#define FONT_X_OFFSET 130
+#define FONT_Y_OFFSET 130
 
 inline sf::Font INVENTORY_FONT;
 
