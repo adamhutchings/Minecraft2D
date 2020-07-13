@@ -51,7 +51,7 @@ int main() {
 
 	// Setup
 	loadTextures();
-
+	loadInventoryFont();
 	loadButtonFont();
 	
 	// For now, just create a new window
