@@ -35,7 +35,7 @@ void renderHotbar(MWindow& window, InventorySection* section) {
 			window.draw(section->contents[i]->spr);
 			if (section->contents[i]->count > 1) {
 				// The item counter display
-				text.setCharacterSize(FONT_SIZE);
+				text.setCharacterSize(INVENTORY_FONT_SIZE);
 				text.setFont(INVENTORY_FONT);
 				text.setPosition(
 					centerX - 100 + FONT_X_OFFSET,
