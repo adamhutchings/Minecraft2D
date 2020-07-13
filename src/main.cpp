@@ -7,6 +7,13 @@ void loadButtonFont() {
 	}
 }
 
+void loadInventoryFont() {
+	if (!INVENTORY_FONT.loadFromFile("res/fonts/Minecraft.ttf")) {
+		std::cout << "Whoops! An error occurred.\n";
+		exit(EXIT_FAILURE);
+	}
+}
+
 void loadTextures() {
 	if (!GRASS_TEX.loadFromFile("res/tex/grass.jpg") ||
 		!DIRT_TEX.loadFromFile("res/tex/dirt.jpg") ||
@@ -44,12 +51,14 @@ int main() {
 
 	// Setup
 	loadTextures();
-
+	loadInventoryFont();
 	loadButtonFont();
 	
 	// For now, just create a new window
 	MWindow wn(WN_WIDTH, WN_HEIGHT, "2D Minecraft");
 	wn.color = WN_BG_COLOR;
+
+	InventoryFrame test(wn, 1000, 1000);
 
 	// Buttons for actions
 	MButton startGame(wn, startNewGame, "New Game", sf::Color(100, 100, 100), 1000, 1000);

@@ -7,6 +7,7 @@
 #include "world/world.h"
 #include "entity/player.h"
 #include "gui/m_button.h"
+#include "gui/hotbar_renderer.h"
 
 // Window settings
 #define WN_WIDTH 2000
@@ -20,6 +21,7 @@
 #define WALK_SPEED 0.005
 
 void loadButtonFont();
+void loadInventoryFont();
 void loadTextures();
 
 void startNewGame(MWindow& window);

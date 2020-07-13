@@ -10,6 +10,7 @@
 
 class InventorySection {
 public:
+	int size;
 	ItemStack** contents;
 	InventorySection(MWindow& renderOn, int size);
 	void addItem(ItemStack& is, int pos);
@@ -18,6 +19,7 @@ public:
 // Abstract class
 class Inventory {
 public:
+	int size;
 	Inventory(int num);
 	InventorySection** sections;
 	void addItem(ItemStack& is);
