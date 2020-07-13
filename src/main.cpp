@@ -7,6 +7,13 @@ void loadButtonFont() {
 	}
 }
 
+void loadInventoryFont() {
+	if (!INVENTORY_FONT.loadFromFile("res/fonts/Minecraft.ttf")) {
+		std::cout << "Whoops! An error occurred.\n";
+		exit(EXIT_FAILURE);
+	}
+}
+
 void loadTextures() {
 	if (!GRASS_TEX.loadFromFile("res/tex/grass.jpg") ||
 		!DIRT_TEX.loadFromFile("res/tex/dirt.jpg") ||

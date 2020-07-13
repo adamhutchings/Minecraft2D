@@ -21,6 +21,7 @@
 #define WALK_SPEED 0.005
 
 void loadButtonFont();
+void loadInventoryFont();
 void loadTextures();
 
 void startNewGame(MWindow& window);
