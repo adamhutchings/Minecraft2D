@@ -12,6 +12,11 @@
 
 #define HOTBAR_DISPLAY_HEIGHT 1400
 
+#define FONT_SIZE 20
+
+#define FONT_X_OFFSET 120
+#define FONT_Y_OFFSET 120
+
 inline sf::Font INVENTORY_FONT;
 
 class InventorySection;
