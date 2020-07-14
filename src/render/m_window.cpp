@@ -13,7 +13,7 @@ MWindow::MWindow(int x, int y, std::string title)
 color(0, 0, 0) {
 	xShift = yShift = 0;
 	player = nullptr;
-	lastMousePressed = false;
+	lastMousePressedLeft = lastMousePressedRight = false;
 	state = MAIN_MENU;
 }
 
@@ -39,12 +39,23 @@ void MWindow::cycle() {
 		}
 
 		// Mouse presses
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && !lastMousePressed) {
-			onClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y);
-			lastMousePressed = true;
-		} else if (!(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) && lastMousePressed) {
-			offClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y);
-			lastMousePressed = false;
+
+		// Left
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && !lastMousePressedLeft) {
+			onClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y, true);
+			lastMousePressedLeft = true;
+		} else if (!(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) && lastMousePressedLeft) {
+			offClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y, true);
+			lastMousePressedLeft = false;
+		}
+
+		// Right
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right) && !lastMousePressedRight) {
+			onClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y, false);
+			lastMousePressedRight = true;
+		} else if (!(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) && lastMousePressedRight) {
+			offClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y, false);
+			lastMousePressedRight = false;
 		}
 
 		// Display the screen
@@ -75,21 +86,23 @@ void MWindow::add(Renderable* obj) {
 	objects.push_back(obj);
 }
 
-void MWindow::onClick(int x, int y) {
-	MButton* button;
-	for (Renderable* object : objects) {
-		button = dynamic_cast<MButton*>(object);
-		if (button) {
-			if (button->contains(x, y)) {
-				button->onClick();
-				return;
+void MWindow::onClick(int x, int y, bool m) {
+	if (m) {
+		MButton* button;
+		for (Renderable* object : objects) {
+			button = dynamic_cast<MButton*>(object);
+			if (button) {
+				if (button->contains(x, y)) {
+					button->onClick();
+					return;
+				}
 			}
 		}
+		breakBlock(*this, x, y);
 	}
-	breakBlock(*this, x, y);
 }
 
-void MWindow::offClick(int x, int y) {
+void MWindow::offClick(int x, int y, bool m) {
 	MButton* button;
 	for (Renderable* object : objects) {
 		button = dynamic_cast<MButton*>(object);
