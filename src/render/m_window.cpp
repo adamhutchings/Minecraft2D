@@ -98,7 +98,7 @@ void MWindow::onClick(int x, int y, bool m) {
 				}
 			}
 		}
-		this->player->breakBlock(x, y);
+		this->player->updateBlock(x, y, true);
 	}
 }
 

@@ -65,7 +65,7 @@ public:
 
 	void update() override;
 
-	void breakBlock(int xPos, int yPos);
+	void updateBlock(int xPos, int yPos, bool destroy);
 };
 
 sf::Vector2i* floorCoords(sf::Vector2f* coords);

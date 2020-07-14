@@ -268,7 +268,7 @@ sf::Vector2f& findSpawnLocation(M2DWorld& world) {
 }
 
 
-void Player::breakBlock(int xPos, int yPos) {
+void Player::updateBlock(int xPos, int yPos, bool destroy) {
 	// Based on the mouse coordinates given, find the block to break
 
 	// We only want to detect if in the main game
@@ -295,8 +295,10 @@ void Player::breakBlock(int xPos, int yPos) {
 		int inY = (int) floor(incrementedPosition.y);
 		if (inX > 0 && inX < WORLD_WIDTH && inY > 0 && inY < WORLD_HEIGHT_LIMIT)
 		if (world->blocks[inX][inY]->str_type != "air") {
-			world->b_break(inX, inY + 1);
-			return;
+			if (destroy) {
+				world->b_break(inX, inY + 1);
+				return;
+			}
 		}
 		// Increment the position
 		incrementedPosition.x += xStep;
