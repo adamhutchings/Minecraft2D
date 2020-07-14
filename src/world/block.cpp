@@ -31,6 +31,10 @@ EntityItem* Block::destroy(M2DWorld& world) {
 
 void Block::place(M2DWorld& world, ItemStack* i) {
 	setTypeTo(i->name);
+	i->count--;
+	if (i->count == 0) {
+		i->name = "empty";
+	}
 }
 
 void Block::setTypeTo(std::string type) {
