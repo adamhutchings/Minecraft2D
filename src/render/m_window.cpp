@@ -168,6 +168,7 @@ void MWindow::handleWindowEvents(sf::Event event) {
 }
 
 void MWindow::handleKeyPresses() {
+	// Player movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player->isCollided()) {
 		if (player) player->jump();
 	} if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
@@ -183,7 +184,33 @@ void MWindow::handleKeyPresses() {
 		if (player->facing && player) player->moveRight(); else if (player) player->moveLeft();
 	} if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
 		if (player->facing && player) player->moveLeft(); else if (player) player->moveRight();
+
+	// Escape menu
 	} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 		escape(*this);
 	}
+
+	// Maybe I can do this better? Who knows?
+	if (player) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
+			player->hotbarPosition = 0;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
+			player->hotbarPosition = 1;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) {
+			player->hotbarPosition = 2;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) {
+			player->hotbarPosition = 3;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)) {
+			player->hotbarPosition = 4;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6)) {
+			player->hotbarPosition = 5;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7)) {
+			player->hotbarPosition = 6;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num8)) {
+			player->hotbarPosition = 7;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num9)) {
+			player->hotbarPosition = 8;
+		}
+	}
+
 }
