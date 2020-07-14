@@ -215,7 +215,7 @@ void breakBlock(MWindow& window, int xPos, int yPos) {
 		int inY = (int) floor(incrementedPosition.y);
 		if (inX > 0 && inX < WORLD_WIDTH && inY > 0 && inY < WORLD_HEIGHT_LIMIT)
 		if (window.player->world->blocks[inX][inY]->str_type != "air") {
-			window.player->world->b_break(*(window.player->world), inX, inY + 1);
+			window.player->world->b_break(inX, inY + 1);
 			return;
 		}
 		// Increment the position

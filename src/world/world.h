@@ -27,7 +27,7 @@ public:
 	void render(MWindow& target) const;
 
 	// Breaking a block
-	void b_break(M2DWorld& world, int xPos, int yPos);
+	void b_break(int xPos, int yPos);
 };
 
 #endif // M2D_WORLD_H
