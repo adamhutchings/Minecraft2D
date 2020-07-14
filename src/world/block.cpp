@@ -29,6 +29,10 @@ EntityItem* Block::destroy(M2DWorld& world) {
 	return new EntityItem(&world, is, x + 0.5, y + 0.5);
 }
 
+void Block::place(M2DWorld& world, ItemStack* i) {
+	setTypeTo(i->name);
+}
+
 void Block::setTypeTo(std::string type) {
 	str_type = type;
 	itemStack->name = type;

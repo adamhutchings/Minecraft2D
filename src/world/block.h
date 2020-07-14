@@ -25,7 +25,10 @@ public:
 	Block(MWindow& window, int x, int y, std::string type="");
 	void render(MWindow& window) const override;
 	void updateSpritePosition(MWindow& relativeTo) override;
+
 	EntityItem* destroy(M2DWorld& world);
+	void place(M2DWorld& world, ItemStack* i);
+
 	void setTypeTo(std::string type);
 };
 
