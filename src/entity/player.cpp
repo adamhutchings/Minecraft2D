@@ -10,6 +10,8 @@ Player::Player(M2DWorld& world)
 	height = 2;
 	width = 0.2;
 
+	hotbarPosition = 8;
+
 	headLeft.setTexture(HEAD_TEX_LEFT, true);
 	headRight.setTexture(HEAD_TEX_RIGHT, true);
 	body.setTexture(BODY_TEX, true);

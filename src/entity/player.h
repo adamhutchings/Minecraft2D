@@ -40,6 +40,9 @@ public:
 	// Is the player facing left (false) or right (true)?
 	bool facing;
 
+	// Which item stack the player is holding (0 through 8)
+	int hotbarPosition;
+
 	Player(M2DWorld& world);
 	void render(MWindow& window) const override;
 	void updateSpritePosition(MWindow& relativeTo) override;
