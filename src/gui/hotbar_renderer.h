@@ -25,7 +25,7 @@ class InventorySection;
 class InventoryFrame {
 public:
 	sf::RectangleShape b, t, l, r; // The four sides
-	InventoryFrame(MWindow& window, int xPos, int yPos);
+	InventoryFrame(MWindow& window, int xPos, int yPos, bool held);
 	void render(MWindow& window);
 };
 
