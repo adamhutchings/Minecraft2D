@@ -64,6 +64,8 @@ public:
 	void sneak();
 
 	void update() override;
+
+	void breakBlock(int xPos, int yPos);
 };
 
 sf::Vector2i* floorCoords(sf::Vector2f* coords);

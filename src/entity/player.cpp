@@ -266,3 +266,41 @@ sf::Vector2f& findSpawnLocation(M2DWorld& world) {
 	// For now, just returns a high spawn
 	return *(new sf::Vector2f(1, 10));
 }
+
+
+void Player::breakBlock(int xPos, int yPos) {
+	// Based on the mouse coordinates given, find the block to break
+
+	// We only want to detect if in the main game
+	if (getWindow()->state != MAIN_GAME) return;
+
+	// The x and y differences
+	float xDiff = xPos - PLAYER_HEAD_X;
+	float yDiff = PLAYER_HEAD_Y - yPos;
+
+	sf::Vector2f pos(xPos, yPos);
+
+	// So we don't declare 100 times in a loop
+	sf::Vector2f incrementedPosition = *screenToBlock(*getWindow(), pos);
+
+	// How much to increment x and y by
+	double distance = sqrt((xDiff*xDiff) + (yDiff*yDiff));
+	double xStep = (xDiff / distance) * PLAYER_REACH / BLOCK_BREAK_COMPARISONS;
+	double yStep = (yDiff / distance) * PLAYER_REACH / BLOCK_BREAK_COMPARISONS;
+
+	// I'll improve window.player->world some other time
+	// We send out a ray from the player's head (actually increment a position)
+	for (int i = 0; i < BLOCK_BREAK_COMPARISONS; i++) {
+		int inX = (int) floor(incrementedPosition.x);
+		int inY = (int) floor(incrementedPosition.y);
+		if (inX > 0 && inX < WORLD_WIDTH && inY > 0 && inY < WORLD_HEIGHT_LIMIT)
+		if (world->blocks[inX][inY]->str_type != "air") {
+			world->b_break(inX, inY + 1);
+			return;
+		}
+		// Increment the position
+		incrementedPosition.x += xStep;
+		incrementedPosition.y += yStep;
+	}
+
+}
