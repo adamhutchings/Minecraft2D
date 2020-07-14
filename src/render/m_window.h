@@ -62,6 +62,5 @@ void escape(MWindow& window);
 void returnToGame(MWindow& window);
 
 sf::Vector2f* screenToBlock(MWindow& relativeTo, sf::Vector2f& coords);
-void breakBlock(MWindow& window, int xPos, int yPos);
 
 #endif // M_WINDOW_H
