@@ -53,6 +53,8 @@ public:
 
 	virtual void die();
 
+	MWindow* getWindow();
+
 };
 
 #endif // M_ENTITY_H
