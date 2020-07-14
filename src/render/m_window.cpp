@@ -103,13 +103,15 @@ void MWindow::onClick(int x, int y, bool m) {
 }
 
 void MWindow::offClick(int x, int y, bool m) {
-	MButton* button;
-	for (Renderable* object : objects) {
-		button = dynamic_cast<MButton*>(object);
-		if (button) {
-			if (button->clicked) {
-				button->offClick(*this);
-				return;
+	if (m) {
+		MButton* button;
+		for (Renderable* object : objects) {
+			button = dynamic_cast<MButton*>(object);
+			if (button) {
+				if (button->clicked) {
+					button->offClick(*this);
+					return;
+				}
 			}
 		}
 	}
