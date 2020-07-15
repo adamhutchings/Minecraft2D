@@ -53,7 +53,7 @@ void MWindow::cycle() {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right) && !lastMousePressedRight) {
 			onClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y, false);
 			lastMousePressedRight = true;
-		} else if (!(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) && lastMousePressedRight) {
+		} else if (!(sf::Mouse::isButtonPressed(sf::Mouse::Button::Right)) && lastMousePressedRight) {
 			offClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y, false);
 			lastMousePressedRight = false;
 		}
@@ -99,6 +99,11 @@ void MWindow::onClick(int x, int y, bool m) {
 			}
 		}
 		this->player->updateBlock(x, y, true);
+	} else {
+		// Right click
+		if (player) {
+			player->updateBlock(x, y, false);
+		}
 	}
 }
 
