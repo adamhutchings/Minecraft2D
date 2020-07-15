@@ -17,7 +17,7 @@
 // Physics settings
 #define GRAVITY_STRENGTH 0.00003
 #define FRICTION 0.05
-#define JUMP_HEIGHT 0.005
+#define JUMP_HEIGHT 0.008
 #define WALK_SPEED 0.005
 
 void loadButtonFont();
