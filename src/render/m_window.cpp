@@ -98,7 +98,9 @@ void MWindow::onClick(int x, int y, bool m) {
 				}
 			}
 		}
-		this->player->updateBlock(x, y, true);
+		if (player) {
+			this->player->updateBlock(x, y, true);
+		}
 	} else {
 		// Right click
 		if (player) {
