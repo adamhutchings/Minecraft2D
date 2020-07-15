@@ -300,6 +300,13 @@ void Player::updateBlock(int xPos, int yPos, bool destroy) {
 			if (destroy) {
 				world->b_break(inX, inY + 1);
 				return;
+			} else {
+				world->b_place(
+					(int) floor(incrementedPosition.x - xStep),
+					(int) floor(incrementedPosition.y - yStep),
+					inventory->sections[0]->contents[hotbarPosition]
+				);
+				return;
 			}
 		}
 		// Increment the position
