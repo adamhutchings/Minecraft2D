@@ -38,7 +38,7 @@ void EntityItem::updateSpritePosition(MWindow& relativeTo) {
 void EntityItem::update() {
 	Entity::update();
 	Player* player; // For later type casts
-	for (Renderable* obj : world->i_window->objects) {
+	for (Renderable* obj : getWindow()->objects) {
 		player = dynamic_cast<Player*>(obj);
 		if (player) {
 			// Checking to see if the player is in bounds for pick up

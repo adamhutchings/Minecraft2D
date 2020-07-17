@@ -3,12 +3,14 @@
 
 #include <iostream>
 #include "../render/renderable.h"
+#include "../item/item_stack.h"
 
 #define WORLD_HEIGHT_LIMIT 16
 #define WORLD_WIDTH 10 // Temporary
 
 class MWindow;
 class Block;
+class ItemStack;
 
 // Represents a world made up of blocks.
 
@@ -26,8 +28,9 @@ public:
 	// Renders every component block
 	void render(MWindow& target) const;
 
-	// Breaking a block
-	void b_break(M2DWorld& world, int xPos, int yPos);
+	// Block updates
+	void b_break(int xPos, int yPos);
+	void b_place(int xPos, int yPos, ItemStack* i);
 };
 
 #endif // M2D_WORLD_H

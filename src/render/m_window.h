@@ -27,7 +27,8 @@ public:
 	int state;
 
 	// For mouse press handling
-	bool lastMousePressed;
+	bool lastMousePressedLeft;
+	bool lastMousePressedRight;
 
 	Player* player;
 
@@ -52,8 +53,8 @@ public:
 
 	void add(Renderable* obj);
 
-	void onClick(int x, int y);
-	void offClick(int x, int y); // x and y might be useful here, who knows?
+	void onClick(int x, int y, bool m);
+	void offClick(int x, int y, bool m); // x and y might be useful here, who knows?
 };
 
 void changeState(MWindow& window, bool escape = true);
@@ -61,6 +62,5 @@ void escape(MWindow& window);
 void returnToGame(MWindow& window);
 
 sf::Vector2f* screenToBlock(MWindow& relativeTo, sf::Vector2f& coords);
-void breakBlock(MWindow& window, int xPos, int yPos);
 
 #endif // M_WINDOW_H

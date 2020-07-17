@@ -34,6 +34,10 @@ void M2DWorld::render(MWindow& target) const {
 	}
 }
 
-void M2DWorld::b_break(M2DWorld& world, int xPos, int yPos) {
-	blocks[xPos][yPos]->destroy(world);
+void M2DWorld::b_break(int xPos, int yPos) {
+	blocks[xPos][yPos]->destroy(*this);
+}
+
+void M2DWorld::b_place(int xPos, int yPos, ItemStack* i) {
+	blocks[xPos][yPos]->place(*this, i);
 }

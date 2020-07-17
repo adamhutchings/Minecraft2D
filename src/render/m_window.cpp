@@ -13,7 +13,7 @@ MWindow::MWindow(int x, int y, std::string title)
 color(0, 0, 0) {
 	xShift = yShift = 0;
 	player = nullptr;
-	lastMousePressed = false;
+	lastMousePressedLeft = lastMousePressedRight = false;
 	state = MAIN_MENU;
 }
 
@@ -39,12 +39,23 @@ void MWindow::cycle() {
 		}
 
 		// Mouse presses
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && !lastMousePressed) {
-			onClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y);
-			lastMousePressed = true;
-		} else if (!(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) && lastMousePressed) {
-			offClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y);
-			lastMousePressed = false;
+
+		// Left
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && !lastMousePressedLeft) {
+			onClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y, true);
+			lastMousePressedLeft = true;
+		} else if (!(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) && lastMousePressedLeft) {
+			offClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y, true);
+			lastMousePressedLeft = false;
+		}
+
+		// Right
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right) && !lastMousePressedRight) {
+			onClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y, false);
+			lastMousePressedRight = true;
+		} else if (!(sf::Mouse::isButtonPressed(sf::Mouse::Button::Right)) && lastMousePressedRight) {
+			offClick(sf::Mouse::getPosition(*this).x, sf::Mouse::getPosition(*this).y, false);
+			lastMousePressedRight = false;
 		}
 
 		// Display the screen
@@ -75,28 +86,39 @@ void MWindow::add(Renderable* obj) {
 	objects.push_back(obj);
 }
 
-void MWindow::onClick(int x, int y) {
-	MButton* button;
-	for (Renderable* object : objects) {
-		button = dynamic_cast<MButton*>(object);
-		if (button) {
-			if (button->contains(x, y)) {
-				button->onClick();
-				return;
+void MWindow::onClick(int x, int y, bool m) {
+	if (m) {
+		MButton* button;
+		for (Renderable* object : objects) {
+			button = dynamic_cast<MButton*>(object);
+			if (button) {
+				if (button->contains(x, y)) {
+					button->onClick();
+					return;
+				}
 			}
 		}
+		if (player) {
+			this->player->updateBlock(x, y, true);
+		}
+	} else {
+		// Right click
+		if (player) {
+			player->updateBlock(x, y, false);
+		}
 	}
-	breakBlock(*this, x, y);
 }
 
-void MWindow::offClick(int x, int y) {
-	MButton* button;
-	for (Renderable* object : objects) {
-		button = dynamic_cast<MButton*>(object);
-		if (button) {
-			if (button->clicked) {
-				button->offClick(*this);
-				return;
+void MWindow::offClick(int x, int y, bool m) {
+	if (m) {
+		MButton* button;
+		for (Renderable* object : objects) {
+			button = dynamic_cast<MButton*>(object);
+			if (button) {
+				if (button->clicked) {
+					button->offClick(*this);
+					return;
+				}
 			}
 		}
 	}
@@ -153,6 +175,7 @@ void MWindow::handleWindowEvents(sf::Event event) {
 }
 
 void MWindow::handleKeyPresses() {
+	// Player movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && player->isCollided()) {
 		if (player) player->jump();
 	} if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
@@ -168,44 +191,33 @@ void MWindow::handleKeyPresses() {
 		if (player->facing && player) player->moveRight(); else if (player) player->moveLeft();
 	} if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
 		if (player->facing && player) player->moveLeft(); else if (player) player->moveRight();
+
+	// Escape menu
 	} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 		escape(*this);
 	}
-}
 
-void breakBlock(MWindow& window, int xPos, int yPos) {
-	// Based on the mouse coordinates given, find the block to break
-
-	// We only want to detect if in the main game
-	if (!(window.player) || (window.state != MAIN_GAME)) return;
-
-	// The x and y differences
-	float xDiff = xPos - PLAYER_HEAD_X;
-	float yDiff = PLAYER_HEAD_Y - yPos;
-
-	sf::Vector2f pos(xPos, yPos);
-
-	// So we don't declare 100 times in a loop
-	sf::Vector2f incrementedPosition = *screenToBlock(window, pos);
-
-	// How much to increment x and y by
-	double distance = sqrt((xDiff*xDiff) + (yDiff*yDiff));
-	double xStep = (xDiff / distance) * PLAYER_REACH / BLOCK_BREAK_COMPARISONS;
-	double yStep = (yDiff / distance) * PLAYER_REACH / BLOCK_BREAK_COMPARISONS;
-
-	// I'll improve window.player->world some other time
-	// We send out a ray from the player's head (actually increment a position)
-	for (int i = 0; i < BLOCK_BREAK_COMPARISONS; i++) {
-		int inX = (int) floor(incrementedPosition.x);
-		int inY = (int) floor(incrementedPosition.y);
-		if (inX > 0 && inX < WORLD_WIDTH && inY > 0 && inY < WORLD_HEIGHT_LIMIT)
-		if (window.player->world->blocks[inX][inY]->str_type != "air") {
-			window.player->world->b_break(*(window.player->world), inX, inY + 1);
-			return;
+	// Maybe I can do this better? Who knows?
+	if (player) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
+			player->hotbarPosition = 0;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
+			player->hotbarPosition = 1;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) {
+			player->hotbarPosition = 2;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) {
+			player->hotbarPosition = 3;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)) {
+			player->hotbarPosition = 4;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6)) {
+			player->hotbarPosition = 5;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7)) {
+			player->hotbarPosition = 6;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num8)) {
+			player->hotbarPosition = 7;
+		} if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num9)) {
+			player->hotbarPosition = 8;
 		}
-		// Increment the position
-		incrementedPosition.x += xStep;
-		incrementedPosition.y += yStep;
 	}
 
 }

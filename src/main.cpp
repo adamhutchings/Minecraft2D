@@ -58,8 +58,6 @@ int main() {
 	MWindow wn(WN_WIDTH, WN_HEIGHT, "2D Minecraft");
 	wn.color = WN_BG_COLOR;
 
-	InventoryFrame test(wn, 1000, 1000);
-
 	// Buttons for actions
 	MButton startGame(wn, startNewGame, "New Game", sf::Color(100, 100, 100), 1000, 1000);
 	MButton retButton(wn, returnToGame, "Resume", sf::Color(100, 100, 100), 1000, 800, true);
